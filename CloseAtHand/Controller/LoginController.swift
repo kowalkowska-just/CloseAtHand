@@ -91,7 +91,7 @@ class LoginController: UIViewController {
     
     private let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        button.attributedButton(withFirstString: "Don't have an account?", withSecondString: "Sign Up")
+        button.attributedButton(withFirstString: "Don't have an account?  ", withSecondString: "Sign Up")
         button.addTarget(self, action: #selector(handleShowSingUp), for: .touchUpInside)
         return button
     }()
@@ -103,7 +103,7 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-
+        hideKeyboardWhenTappedAround()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -113,6 +113,8 @@ class LoginController: UIViewController {
     //MARK: - Helper functions
     
     func configureUI() {
+        configureNavigationBar()
+        
         view.addGradientWithColors(.topColorGradient, .bottomColorGradient, direction: .topLeftCornerToBottomRightCorner)
         
         view.addSubview(titleLabel)
@@ -131,9 +133,17 @@ class LoginController: UIViewController {
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 5)
         dontHaveAccountButton.centerX(inView: view)
     }
+
+    func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barStyle = .black
+    }
+    
     //MARK: - Selectors
 
     @objc func handleShowSingUp() {
-        print("DEBUG: Show Sign Up view...")
+        let controller = SignUpController()
+        controller.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
