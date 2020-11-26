@@ -65,6 +65,7 @@ extension UIView {
         case bottomToTop
         case leftToRight
         case rightToLeft
+        case topLeftCornerToBottomRightCorner
     }
     
     func addGradientWithColors(_ firstColor: UIColor, _ secondColor: UIColor, direction: Direction, locations: [NSNumber]? = [0.0, 1.0]) {
@@ -89,11 +90,79 @@ extension UIView {
         case .rightToLeft:
             gradient.startPoint = CGPoint(x: 1.0, y: 0.5)
             gradient.endPoint = CGPoint(x: 0.0, y: 0.5)
+            
+        case .topLeftCornerToBottomRightCorner:
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         }
+        
         
         self.layer.addSublayer(gradient)
     }
+    
+    //MARK: - ContainerView for UITextField in Login/SignUp Controller
+    
+    func inputContainerView(image: UIImage, textField: UITextField) -> UIView {
+        let view = UIView()
+        
+        let imageView = UIImageView()
+        imageView.image = image
+        imageView.tintColor = .white
+        imageView.contentMode = .scaleAspectFit
+        
+        view.addSubview(imageView)
+        imageView.anchor(left: view.leftAnchor)
+        imageView.dimensions(width: 18, height: 18)
+        imageView.centerY(inView: view)
+        
+        view.addSubview(textField)
+        textField.anchor(left: imageView.rightAnchor, right: view.rightAnchor, paddingLeft: 8)
+        textField.centerY(inView: view)
+        
+        let separationView = UIView()
+        separationView.backgroundColor = .white
+        view.addSubview(separationView)
+        separationView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        separationView.dimensions(height: 1)
+        
+        return view
+    }
+    
+    //MARK: - SeparationOrView
+    
+    func createSeparationView(withText text: String) -> UIView {
+        let view = UIView()
+        
+        let label = UILabel()
+        label.text = text
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .white
+        
+        view.addSubview(label)
+        label.centerX(inView: view)
+        label.centerY(inView: view)
+        
+        let leftSeparationView = UIView()
+        leftSeparationView.backgroundColor = .white
+        
+        let rightSeparationView = UIView()
+        rightSeparationView.backgroundColor = .white
+        
+        view.addSubview(leftSeparationView)
+        leftSeparationView.anchor(left: view.leftAnchor, right: label.rightAnchor, paddingLeft: 0, paddingRight: 35)
+        leftSeparationView.dimensions(height: 1)
+        leftSeparationView.centerY(inView: view)
+        
+        view.addSubview(rightSeparationView)
+        rightSeparationView.anchor(left: label.leftAnchor, right: view.rightAnchor, paddingLeft: 35, paddingRight: 0)
+        rightSeparationView.dimensions(height: 1)
+        rightSeparationView.centerY(inView: view)
+        
+        return view
+    }
 }
+
+//MARK: - UIColor
 
 extension UIColor {
     
@@ -103,6 +172,51 @@ extension UIColor {
     
     static let topColorGradient = UIColor.rgb(red: 19, green: 103, blue: 129)
     static let bottomColorGradient = UIColor.rgb(red: 88, green: 36, blue: 76)
+    static let facebookColor = UIColor.rgb(red: 59, green: 89, blue: 152)
+    static let appleColor = UIColor.rgb(red: 25, green: 25, blue: 25)
+
 }
 
+//MARK: - UITextField
 
+extension UITextField {
+    
+    func textField(withPlaceholder placeholder: String, isSecureTextEntry: Bool) -> UITextField{
+        let tf = UITextField()
+        tf.borderStyle = .none
+        tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor(white: 1.0, alpha: 0.5)])
+        tf.textColor = .white
+        tf.font = UIFont.systemFont(ofSize: 14)
+        tf.isSecureTextEntry = isSecureTextEntry
+        tf.keyboardAppearance = .dark
+        
+        return tf
+    }
+}
+
+//MARK: - AuthButton
+
+extension AuthButton {
+    
+    func addSymbol(withLogo nameLogo: String) {
+        let logo = UIImageView()
+        logo.image = UIImage(named: "\(nameLogo)")
+        logo.contentMode = .scaleAspectFit
+        
+        self.addSubview(logo)
+        logo.anchor(left: self.leftAnchor, paddingLeft: 15)
+        logo.dimensions(width: 18, height: 18)
+        logo.centerY(inView: self)
+    }
+}
+
+//MARK: - UIButton
+
+extension UIButton {
+    
+    func attributedButton(withFirstString firstString: String, withSecondString secondString: String) {
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.5)])
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white]))
+        self.setAttributedTitle(attributedTitle, for: .normal)
+    }
+}

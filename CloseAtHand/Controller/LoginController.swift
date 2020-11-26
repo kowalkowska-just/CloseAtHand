@@ -1,0 +1,139 @@
+//
+//  LoginController.swift
+//  CloseAtHand
+//
+//  Created by Justyna Kowalkowska on 26/11/2020.
+//
+
+import UIKit
+
+class LoginController: UIViewController {
+
+    //MARK: - Properties
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Closeathand"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Satisfy-Regular", size: 50)
+        return label
+    }()
+    
+    private let emailTextField: UITextField = {
+        let tf = UITextField().textField(withPlaceholder: "EMAIL",
+                                         isSecureTextEntry: false)
+        tf.keyboardType = .emailAddress
+        return tf
+    }()
+    
+    private var passwordTextField: UITextField = {
+        return UITextField().textField(withPlaceholder: "PASSWORD",
+                                       isSecureTextEntry: true)
+    }()
+    
+    private lazy var emailContainerView: UIView = {
+        let emailView = UIView().inputContainerView(image: UIImage(systemName: "envelope")!,
+                                                    textField: emailTextField)
+        emailView.dimensions(height: 40)
+        
+        return emailView
+    }()
+    
+    private lazy var passwordContainerView: UIView = {
+        let passwordView = UIView().inputContainerView(image: UIImage(systemName: "lock")!,
+                                                       textField: passwordTextField)
+        passwordView.dimensions(height: 40)
+        return passwordView
+    }()
+    
+    private let loginButton: AuthButton = {
+        let button = AuthButton()
+        button.setTitle("Log in", for: .normal)
+        button.backgroundColor = UIColor.init(white: 1, alpha: 0.15)
+        return button
+    }()
+    
+    private let separationView: UIView = {
+        let separator = UIView().createSeparationView(withText: "OR")
+        separator.dimensions(height: 12)
+        
+        return separator
+    }()
+    
+    private let loginWithFacebookButton: AuthButton = {
+        let button = AuthButton()
+        button.setTitle("Log in with Facebook", for: .normal)
+        button.backgroundColor = UIColor.facebookColor
+        button.addSymbol(withLogo: "facebook")
+        
+        return button
+    }()
+    
+    private let loginWithAppleButton: AuthButton = {
+        let button = AuthButton()
+        button.setTitle("Log in with Apple", for: .normal)
+        button.backgroundColor = UIColor.appleColor.withAlphaComponent(0.5)
+        button.addSymbol(withLogo: "apple")
+        
+        return button
+    }()
+    
+    private let forgotPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("FORGOT YOUR PASSWORD?", for: .normal)
+        button.setTitleColor(UIColor(white: 1.0, alpha: 0.5), for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.titleLabel?.textAlignment = .center
+        button.dimensions(height: 40)
+        return button
+    }()
+    
+    private let dontHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.attributedButton(withFirstString: "Don't have an account?", withSecondString: "Sign Up")
+        button.addTarget(self, action: #selector(handleShowSingUp), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    
+    //MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    //MARK: - Helper functions
+    
+    func configureUI() {
+        view.addGradientWithColors(.topColorGradient, .bottomColorGradient, direction: .topLeftCornerToBottomRightCorner)
+        
+        view.addSubview(titleLabel)
+        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 25)
+        titleLabel.centerX(inView: view)
+        
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton, forgotPasswordButton, separationView, loginWithFacebookButton, loginWithAppleButton])
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        stack.spacing = 24
+                
+        view.addSubview(stack)
+        stack.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 18, paddingLeft: 30, paddingRight: 30)
+        
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 5)
+        dontHaveAccountButton.centerX(inView: view)
+    }
+    //MARK: - Selectors
+
+    @objc func handleShowSingUp() {
+        print("DEBUG: Show Sign Up view...")
+    }
+}
