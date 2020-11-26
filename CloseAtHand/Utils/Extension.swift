@@ -95,4 +95,14 @@ extension UIView {
     }
 }
 
+extension UIColor {
+    
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor.init(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)
+    }
+    
+    static let topColorGradient = UIColor.rgb(red: 19, green: 103, blue: 129)
+    static let bottomColorGradient = UIColor.rgb(red: 88, green: 36, blue: 76)
+}
+
 
