@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
 
@@ -51,6 +52,7 @@ class LoginController: UIViewController {
         let button = AuthButton()
         button.setTitle("Log in", for: .normal)
         button.backgroundColor = UIColor.init(white: 1, alpha: 0.15)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -139,11 +141,58 @@ class LoginController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
     }
     
+    func handleError(error: Error) {
+        let errorAuthStatus = AuthErrorCode.init(rawValue: error._code)!
+        switch errorAuthStatus {
+        case .wrongPassword:
+            print("wrongPassword")
+        case .invalidEmail:
+            print("invalidEmail")
+        case .operationNotAllowed:
+            print("operationNotAllowed")
+        case .userDisabled:
+            print("userDisabled")
+        case .userNotFound:
+            print("userNotFound")
+        default: print("Error not supported here")
+        }
+    }
+    
     //MARK: - Selectors
 
     @objc func handleShowSingUp() {
         let controller = SignUpController()
         controller.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func handleLogin() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+ 
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+
+            if let error = error {
+                print("Failed to log user in with error \(error.localizedDescription) ")
+                return self.handleError(error: error)
+            }
+            print("Succesfully logged user in..")
+            
+            guard let user = Auth.auth().currentUser else { return }
+            print("DEBUG: Current user is \(user.email)")
+            
+            switch user.isEmailVerified {
+            case true:
+                print("Mail is verified..")
+            case false:
+                print("Mail is not verified yet")
+                user.sendEmailVerification { (error) in
+                    guard let error = error else {
+                        return print("user email verification sent..")
+                    }
+                    print("Error with verification \(error)")
+                }
+            }
+        }
     }
 }
