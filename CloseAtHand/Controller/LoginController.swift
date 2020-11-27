@@ -145,15 +145,11 @@ class LoginController: UIViewController {
         let errorAuthStatus = AuthErrorCode.init(rawValue: error._code)!
         switch errorAuthStatus {
         case .wrongPassword:
-            print("wrongPassword")
+            return presentAlertController(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
         case .invalidEmail:
-            print("invalidEmail")
-        case .operationNotAllowed:
-            print("operationNotAllowed")
-        case .userDisabled:
-            print("userDisabled")
+            return presentAlertController(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
         case .userNotFound:
-            print("userNotFound")
+            return presentAlertController(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
         default: print("Error not supported here")
         }
     }
