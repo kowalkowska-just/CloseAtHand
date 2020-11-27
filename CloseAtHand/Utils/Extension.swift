@@ -66,6 +66,7 @@ extension UIView {
         case leftToRight
         case rightToLeft
         case topLeftCornerToBottomRightCorner
+        case topRightCornerToBottomLeftCorner
     }
     
     func addGradientWithColors(_ firstColor: UIColor, _ secondColor: UIColor, direction: Direction, locations: [NSNumber]? = [0.0, 1.0]) {
@@ -94,9 +95,12 @@ extension UIView {
         case .topLeftCornerToBottomRightCorner:
             gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
             gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        case .topRightCornerToBottomLeftCorner:
+            gradient.startPoint = CGPoint(x: 1.0, y: 0.0)
+            gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         }
-        
-        
+    
         self.layer.addSublayer(gradient)
     }
     

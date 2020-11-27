@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpController: UIViewController {
 
@@ -64,6 +65,7 @@ class SignUpController: UIViewController {
         let button = AuthButton()
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor.init(white: 1, alpha: 0.15)
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -115,7 +117,7 @@ class SignUpController: UIViewController {
     
     func configureUI() {
         
-        view.addGradientWithColors(.topColorGradient, .bottomColorGradient, direction: .topLeftCornerToBottomRightCorner)
+        view.addGradientWithColors(.topColorGradient, .bottomColorGradient, direction: .topRightCornerToBottomLeftCorner)
         
         view.addSubview(titleLabel)
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 25)
@@ -143,5 +145,26 @@ class SignUpController: UIViewController {
 
     @objc func handleShowLogin() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("DEBUG: Failed to register user with error: \(error)")
+                return
+            }
+            
+            guard let uid = result?.user.uid else { return }
+            
+            let values = ["email": email, "fullname": fullname] as [String: Any]
+            
+            Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
+                print("DEBUG: Successfully register user and saved data...")
+            }
+        }
     }
 }

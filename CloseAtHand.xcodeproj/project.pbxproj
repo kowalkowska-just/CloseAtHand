@@ -21,6 +21,7 @@
 		D16C08962570017800D16F2C /* Satisfy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16C08952570017800D16F2C /* Satisfy-Regular.ttf */; };
 		D16C089B2570080400D16F2C /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C089A2570080400D16F2C /* AuthButton.swift */; };
 		D16C08A02570282100D16F2C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D16C089F2570282100D16F2C /* GoogleService-Info.plist */; };
+		D16C08C2257061E500D16F2C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C08C1257061E500D16F2C /* HomeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		D16C08952570017800D16F2C /* Satisfy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satisfy-Regular.ttf"; sourceTree = "<group>"; };
 		D16C089A2570080400D16F2C /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		D16C089F2570282100D16F2C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D16C08C1257061E500D16F2C /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		DCAC1B660B55A39AAB4399E8 /* Pods-CloseAtHand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloseAtHand.release.xcconfig"; path = "Target Support Files/Pods-CloseAtHand/Pods-CloseAtHand.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 			children = (
 				D16C087A256FE39900D16F2C /* LoginController.swift */,
 				D16C087F256FE3B500D16F2C /* SignUpController.swift */,
+				D16C08C1257061E500D16F2C /* HomeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			files = (
 				D16C0885256FE3D600D16F2C /* Extension.swift in Sources */,
 				D16C089B2570080400D16F2C /* AuthButton.swift in Sources */,
+				D16C08C2257061E500D16F2C /* HomeController.swift in Sources */,
 				D16C087B256FE39900D16F2C /* LoginController.swift in Sources */,
 				D16C0839256FE09F00D16F2C /* AppDelegate.swift in Sources */,
 				D16C083B256FE09F00D16F2C /* SceneDelegate.swift in Sources */,
