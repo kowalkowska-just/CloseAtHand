@@ -243,7 +243,7 @@ extension UIViewController {
     
     //MARK: - Present Alert Controller
     
-    func presentAlertController(withTitle title: String, withMessage message: String) {
+    func presentAlertControllerWithOKButton(withTitle title: String, withMessage message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

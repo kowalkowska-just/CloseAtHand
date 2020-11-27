@@ -144,12 +144,12 @@ class LoginController: UIViewController {
     func handleError(error: Error) {
         let errorAuthStatus = AuthErrorCode.init(rawValue: error._code)!
         switch errorAuthStatus {
-        case .wrongPassword:
-            return presentAlertController(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
-        case .invalidEmail:
-            return presentAlertController(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
-        case .userNotFound:
-            return presentAlertController(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
+        case .wrongPassword,
+             .invalidEmail,
+             .userNotFound:
+            
+            return presentAlertControllerWithOKButton(withTitle: "Opss..", withMessage: "\(error.localizedDescription)")
+            
         default: print("Error not supported here")
         }
     }
@@ -172,22 +172,30 @@ class LoginController: UIViewController {
                 print("Failed to log user in with error \(error.localizedDescription) ")
                 return self.handleError(error: error)
             }
-            print("Succesfully logged user in..")
             
             guard let user = Auth.auth().currentUser else { return }
-            print("DEBUG: Current user is \(user.email)")
             
             switch user.isEmailVerified {
             case true:
                 print("Mail is verified..")
             case false:
                 print("Mail is not verified yet")
-                user.sendEmailVerification { (error) in
-                    guard let error = error else {
-                        return print("user email verification sent..")
+                
+                let alert = UIAlertController(title: "This account isn't verified.", message: "Please check your email box or resend verification email.", preferredStyle: .actionSheet)
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                
+                alert.addAction(UIAlertAction(title: "SEND", style: .default, handler: { (self) in
+                    user.sendEmailVerification { (error) in
+                        guard let error = error else {
+                            return print("user email verification sent..")
+                        }
+                        print("Error with verification \(error)")
                     }
-                    print("Error with verification \(error)")
-                }
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+
             }
         }
     }
