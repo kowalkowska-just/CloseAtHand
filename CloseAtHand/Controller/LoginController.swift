@@ -106,6 +106,11 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         configureUI()
         hideKeyboardWhenTappedAround()
+        
+        //Gesture Recognizer
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleShowSingUp))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        view.addGestureRecognizer(swipeLeft)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -155,7 +160,7 @@ class LoginController: UIViewController {
     }
     
     //MARK: - Selectors
-
+    
     @objc func handleShowSingUp() {
         let controller = SignUpController()
         controller.modalPresentationStyle = .fullScreen

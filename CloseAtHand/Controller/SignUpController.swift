@@ -107,6 +107,11 @@ class SignUpController: UIViewController {
         super.viewDidLoad()
         configureUI()
         hideKeyboardWhenTappedAround()
+        
+        //Gesture Recognizer
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleShowLogin))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        view.addGestureRecognizer(swipeRight)
     }
     
     override var prefersStatusBarHidden: Bool {
