@@ -181,8 +181,12 @@ class LoginController: UIViewController {
             guard let user = Auth.auth().currentUser else { return }
             
             switch user.isEmailVerified {
+            
             case true:
                 print("Mail is verified..")
+                self.dismiss(animated: true, completion: nil)
+                
+                
             case false:
                 print("Mail is not verified yet")
                 
@@ -200,7 +204,6 @@ class LoginController: UIViewController {
                 }))
                 
                 self.present(alert, animated: true, completion: nil)
-
             }
         }
     }

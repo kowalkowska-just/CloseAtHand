@@ -169,12 +169,14 @@ class SignUpController: UIViewController {
             user.sendEmailVerification { (error) in
                 guard let error = error else {
                     
-                    self.presentAlertControllerWithOKButton(withTitle: "A verification link has been sent to your e-mail account", withMessage: "Click the link that has just been sent to your email account (\(user.email!)) to verify your email address and continue the logging in. \n If you not get this email, please check you spam box.")
+                    self.presentAlertControllerWithOKButton(withTitle: "A verification link has been sent to your e-mail account",
+                                                            withMessage: "Click the link that has just been sent to your email account (\(user.email!)) to verify your email address and continue the logging in. \n If you not get this email, please check you spam box.")
                     return print("DEBUG: User email verification sent..")
                 }
                 print("DEBUG: Failed to sent a verification email to user: \(error)")
             }
             
+            //Save data
             guard let uid = result?.user.uid else { return }
             
             let values = ["email": email, "fullname": fullname] as [String: Any]
