@@ -12,5 +12,8 @@ target 'CloseAtHand' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	pod 'GeoFire'
+  
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
 
 end

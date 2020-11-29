@@ -48,6 +48,7 @@ class HomeController: UIViewController {
             print("DEBUG: Error signing out..")
         }
     }
+    
     //MARK: - Helper functions
     
     
