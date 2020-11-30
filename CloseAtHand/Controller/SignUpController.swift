@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import FacebookCore
+import FacebookLogin
 
 class SignUpController: UIViewController {
 
@@ -81,7 +83,7 @@ class SignUpController: UIViewController {
         button.setTitle("Continue with Facebook", for: .normal)
         button.backgroundColor = UIColor.facebookColor
         button.addSymbol(withLogo: "facebook")
-        
+        button.addTarget(self, action: #selector(handleSignUpWithFacebook), for: .touchUpInside)
         return button
     }()
     
@@ -184,6 +186,39 @@ class SignUpController: UIViewController {
             Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
                 print("DEBUG: Successfully register user and saved data...")
             }
+        }
+    }
+    
+    @objc func handleSignUpWithFacebook() {
+    
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
+            switch result {
+            case .success(granted: _, declined: _, token: _):
+                self.singIntoFirebase()
+                self.dismiss(animated: true, completion: nil)
+                
+            case .cancelled:
+                self.shouldPresentLoadingView(true, message: "Canceled getting Facebook user..")
+                UIView.animate(withDuration: 3.5) {
+                    self.shouldPresentLoadingView(false)
+                }
+
+            case .failed(let error):
+                print("DEBUG: Failed to register user use Facebook, with error: \(error) ")
+            }
+        }
+    }
+    
+    fileprivate func singIntoFirebase() {
+        guard let authenticationToken = AccessToken.current?.tokenString else { return }
+        let credential = FacebookAuthProvider.credential(withAccessToken: authenticationToken)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if let error = error {
+                print("DEBUG: \(error)")
+                return
+            }
+            print("DEBUG: Succesfully logged in into Facebook.")
         }
     }
 }
