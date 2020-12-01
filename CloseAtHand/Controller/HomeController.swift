@@ -18,7 +18,7 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        signOut()
+        signOut()
         
         checkIfUserIsLoggedIn()
         view.backgroundColor = .red
