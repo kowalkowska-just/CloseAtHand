@@ -12,16 +12,16 @@ class HomeController: UIViewController {
 
     //MARK: - Properties
     
+    let weatherWidget = WeatherWidget()
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        signOut()
-        
+//        signOut()
+        configureUI()
         checkIfUserIsLoggedIn()
-        view.backgroundColor = .red
     }
     
     //MARK: - API
@@ -51,6 +51,14 @@ class HomeController: UIViewController {
     
     //MARK: - Helper functions
     
+    func configureUI() {
+        view.addGradientWithColors(.lightGray, .darkGray, direction: .topLeftCornerToBottomRightCorner)
+        
+        view.addSubview(weatherWidget)
+        weatherWidget.dimensions(width: (view.bounds.size.width / 2) - 30 , height: 170)
+        weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingLeft: 20)
+        
+    }
     
     //MARK: - Selectors
 

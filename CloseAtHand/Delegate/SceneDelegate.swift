@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        let navController = UINavigationController(rootViewController: HomeController())
-        window?.rootViewController = navController
+       // let navController = UINavigationController(rootViewController: TabBarController())
+        window?.rootViewController = TabBarController()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

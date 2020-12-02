@@ -132,7 +132,7 @@ extension UIView {
         return view
     }
     
-    //MARK: - SeparationOrView
+    //MARK: - SeparationView
     
     func createSeparationView(withText text: String) -> UIView {
         let view = UIView()
@@ -161,6 +161,14 @@ extension UIView {
         rightSeparationView.anchor(left: label.leftAnchor, right: view.rightAnchor, paddingLeft: 35, paddingRight: 0)
         rightSeparationView.dimensions(height: 1)
         rightSeparationView.centerY(inView: view)
+        
+        return view
+    }
+    
+    func createSeparator(color: UIColor) -> UIView {
+        let view = UIView()
+        view.backgroundColor = color
+        view.dimensions(height: 1)
         
         return view
     }
