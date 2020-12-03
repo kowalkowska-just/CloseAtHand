@@ -76,6 +76,7 @@ extension UIView {
         gradient.locations = locations
         
         switch direction {
+
         case .topToBottom:
             gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
             gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
@@ -102,6 +103,15 @@ extension UIView {
         }
     
         self.layer.addSublayer(gradient)
+    }
+    
+    //MARK: - Shadow
+    
+    func addShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 3, height: 1.5)
+        layer.masksToBounds = false
     }
     
     //MARK: - ContainerView for UITextField in Login/SignUp Controller
@@ -186,6 +196,9 @@ extension UIColor {
     static let bottomColorGradient = UIColor.rgb(red: 88, green: 36, blue: 76)
     static let facebookColor = UIColor.rgb(red: 59, green: 89, blue: 152)
     static let appleColor = UIColor.rgb(red: 25, green: 25, blue: 25)
+    static let weatherTopColor = UIColor.rgb(red: 7, green: 163, blue: 178)
+    static let weatherBottomColor = UIColor.rgb(red: 217, green: 236, blue: 199)
+
 
 }
 
@@ -300,5 +313,13 @@ extension UIViewController {
                 }
             }
         }
+    }
+    
+    func configureNavigationBar(withTitle title: String, withColor color: UIColor) {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        navigationItem.title = title
+        
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = color
     }
 }

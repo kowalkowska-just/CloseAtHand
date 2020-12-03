@@ -15,6 +15,11 @@
 		D10CE5FE257708400080AC40 /* PlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE5FD257708400080AC40 /* PlacesController.swift */; };
 		D10CE603257708870080AC40 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE602257708870080AC40 /* NotesController.swift */; };
 		D10CE60825770E720080AC40 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE60725770E720080AC40 /* TabBarController.swift */; };
+		D10CE61C25786A330080AC40 /* ToDoListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE61B25786A330080AC40 /* ToDoListWidget.swift */; };
+		D10CE62425786A970080AC40 /* PlannerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE62325786A970080AC40 /* PlannerWidget.swift */; };
+		D10CE62925786AAA0080AC40 /* PlacesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE62825786AAA0080AC40 /* PlacesWidget.swift */; };
+		D10CE62E25786AC10080AC40 /* NotesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE62D25786AC10080AC40 /* NotesWidget.swift */; };
+		D10CE63425786B3B0080AC40 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10CE63325786B3B0080AC40 /* CalendarWidget.swift */; };
 		D16C0839256FE09F00D16F2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C0838256FE09F00D16F2C /* AppDelegate.swift */; };
 		D16C083B256FE09F00D16F2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C083A256FE09F00D16F2C /* SceneDelegate.swift */; };
 		D16C0840256FE09F00D16F2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16C083E256FE09F00D16F2C /* Main.storyboard */; };
@@ -58,6 +63,11 @@
 		D10CE5FD257708400080AC40 /* PlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesController.swift; sourceTree = "<group>"; };
 		D10CE602257708870080AC40 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
 		D10CE60725770E720080AC40 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D10CE61B25786A330080AC40 /* ToDoListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListWidget.swift; sourceTree = "<group>"; };
+		D10CE62325786A970080AC40 /* PlannerWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerWidget.swift; sourceTree = "<group>"; };
+		D10CE62825786AAA0080AC40 /* PlacesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesWidget.swift; sourceTree = "<group>"; };
+		D10CE62D25786AC10080AC40 /* NotesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesWidget.swift; sourceTree = "<group>"; };
+		D10CE63325786B3B0080AC40 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		D16C0835256FE09F00D16F2C /* CloseAtHand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloseAtHand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16C0838256FE09F00D16F2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D16C083A256FE09F00D16F2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +164,46 @@
 			path = SectionController;
 			sourceTree = "<group>";
 		};
+		D10CE6162578699F0080AC40 /* ToDoList View */ = {
+			isa = PBXGroup;
+			children = (
+				D10CE61B25786A330080AC40 /* ToDoListWidget.swift */,
+			);
+			path = "ToDoList View";
+			sourceTree = "<group>";
+		};
+		D10CE617257869BA0080AC40 /* Planner View */ = {
+			isa = PBXGroup;
+			children = (
+				D10CE62325786A970080AC40 /* PlannerWidget.swift */,
+			);
+			path = "Planner View";
+			sourceTree = "<group>";
+		};
+		D10CE618257869BC0080AC40 /* Places View */ = {
+			isa = PBXGroup;
+			children = (
+				D10CE62825786AAA0080AC40 /* PlacesWidget.swift */,
+			);
+			path = "Places View";
+			sourceTree = "<group>";
+		};
+		D10CE61A257869F00080AC40 /* Notes View */ = {
+			isa = PBXGroup;
+			children = (
+				D10CE62D25786AC10080AC40 /* NotesWidget.swift */,
+			);
+			path = "Notes View";
+			sourceTree = "<group>";
+		};
+		D10CE63225786B070080AC40 /* Calendar View */ = {
+			isa = PBXGroup;
+			children = (
+				D10CE63325786B3B0080AC40 /* CalendarWidget.swift */,
+			);
+			path = "Calendar View";
+			sourceTree = "<group>";
+		};
 		D16C082C256FE09F00D16F2C = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +284,11 @@
 			isa = PBXGroup;
 			children = (
 				D10CE5D62576C7560080AC40 /* Weather View */,
+				D10CE63225786B070080AC40 /* Calendar View */,
+				D10CE6162578699F0080AC40 /* ToDoList View */,
+				D10CE617257869BA0080AC40 /* Planner View */,
+				D10CE618257869BC0080AC40 /* Places View */,
+				D10CE61A257869F00080AC40 /* Notes View */,
 				D16C089A2570080400D16F2C /* AuthButton.swift */,
 			);
 			path = View;
@@ -449,15 +504,20 @@
 			files = (
 				D16C0885256FE3D600D16F2C /* Extension.swift in Sources */,
 				D16C089B2570080400D16F2C /* AuthButton.swift in Sources */,
+				D10CE62425786A970080AC40 /* PlannerWidget.swift in Sources */,
 				D10CE5F9257708020080AC40 /* PlannerController.swift in Sources */,
 				D10CE60825770E720080AC40 /* TabBarController.swift in Sources */,
 				D10CE5E02576C8390080AC40 /* WeatherWidget.swift in Sources */,
 				D10CE5F4257707CA0080AC40 /* ToDoListController.swift in Sources */,
 				D16C08C2257061E500D16F2C /* HomeController.swift in Sources */,
+				D10CE62925786AAA0080AC40 /* PlacesWidget.swift in Sources */,
+				D10CE62E25786AC10080AC40 /* NotesWidget.swift in Sources */,
 				D10CE5EF2577079F0080AC40 /* WeatherController.swift in Sources */,
 				D16C087B256FE39900D16F2C /* LoginController.swift in Sources */,
 				D16C0839256FE09F00D16F2C /* AppDelegate.swift in Sources */,
+				D10CE61C25786A330080AC40 /* ToDoListWidget.swift in Sources */,
 				D10CE5FE257708400080AC40 /* PlacesController.swift in Sources */,
+				D10CE63425786B3B0080AC40 /* CalendarWidget.swift in Sources */,
 				D16C083B256FE09F00D16F2C /* SceneDelegate.swift in Sources */,
 				D16C0880256FE3B500D16F2C /* SignUpController.swift in Sources */,
 				D10CE603257708870080AC40 /* NotesController.swift in Sources */,

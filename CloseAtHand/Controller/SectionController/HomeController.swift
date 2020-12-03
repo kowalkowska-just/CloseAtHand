@@ -13,6 +13,11 @@ class HomeController: UIViewController {
     //MARK: - Properties
     
     let weatherWidget = WeatherWidget()
+    let calendarWidget = CalendarWidget()
+    let toDoListWidget = ToDoListWidget()
+    let plannerWidget = PlannerWidget()
+    let placesWidget = PlacesWidget()
+    let notesWidget = NotesWidget()
     
     //MARK: - Lifecycle
     
@@ -52,14 +57,62 @@ class HomeController: UIViewController {
     //MARK: - Helper functions
     
     func configureUI() {
-        view.addGradientWithColors(.lightGray, .darkGray, direction: .topLeftCornerToBottomRightCorner)
+        let tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
+        let statusBarHeight = navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+        let heightView = view.bounds.size.height - tabBarHeight - statusBarHeight - navigationBarHeight
+        
+        configureNavBar()
+        
+        view.backgroundColor = .white
         
         view.addSubview(weatherWidget)
-        weatherWidget.dimensions(width: (view.bounds.size.width / 2) - 30 , height: 170)
-        weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingLeft: 20)
+        weatherWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
+                                 height: (heightView - 40) / 3)
+        weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
+                             paddingTop: 10, paddingLeft: 10)
         
+        view.addSubview(calendarWidget)
+        calendarWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
+                                  height: (heightView - 40) / 3)
+        calendarWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: weatherWidget.rightAnchor,
+                              paddingTop: 10, paddingLeft: 10)
+        
+        view.addSubview(toDoListWidget)
+        toDoListWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
+                                  height: (heightView - 40) / 3)
+        toDoListWidget.anchor(top: weatherWidget.bottomAnchor, left: view.leftAnchor,
+                              paddingTop: 10, paddingLeft: 10)
+        
+        view.addSubview(plannerWidget)
+        plannerWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
+                                 height: (heightView - 40) / 3)
+        plannerWidget.anchor(top: calendarWidget.bottomAnchor, left: toDoListWidget.rightAnchor,
+                             paddingTop: 10, paddingLeft: 10)
+        
+        view.addSubview(placesWidget)
+        placesWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
+                                height: (heightView - 40) / 3)
+        placesWidget.anchor(top: toDoListWidget.bottomAnchor, left: view.leftAnchor,
+                            paddingTop: 10, paddingLeft: 10)
+        
+        view.addSubview(notesWidget)
+        notesWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
+                               height: (heightView - 40) / 3)
+        notesWidget.anchor(top: plannerWidget.bottomAnchor, left: placesWidget.rightAnchor,
+                           paddingTop: 10, paddingLeft: 10)
+    }
+    
+    func configureNavBar() {
+        configureNavigationBar(withTitle: "Home", withColor: .white)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(handlePersonController))
+        navigationItem.rightBarButtonItem?.tintColor = .darkGray
     }
     
     //MARK: - Selectors
 
+    @objc func handlePersonController() {
+        
+    }
 }

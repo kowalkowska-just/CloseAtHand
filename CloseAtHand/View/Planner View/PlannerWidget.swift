@@ -1,0 +1,37 @@
+//
+//  PlannerWidget.swift
+//  CloseAtHand
+//
+//  Created by Justyna Kowalkowska on 03/12/2020.
+//
+
+import UIKit
+
+class PlannerWidget: UIView {
+
+    // MARK: - Properties
+
+    
+    // MARK: - Lifecycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Helper Functions
+    
+    func configureUI() {
+        backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        layer.cornerRadius = 10
+        addShadow()
+    }
+    
+    // MARK: - Selectors
+
+}

@@ -9,20 +9,27 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    let vc1 = HomeController()
-    let vc2 = ToDoListController()
-    let vc3 = PlannerController()
-    let vc4 = NotesController()
-    let vc5 = PlacesController()
+    // MARK: - Properties
+    
+    let vc1 = UINavigationController(rootViewController: HomeController())
+    let vc2 = UINavigationController(rootViewController: ToDoListController())
+    let vc3 = UINavigationController(rootViewController: PlannerController())
+    let vc4 = UINavigationController(rootViewController: NotesController())
+    let vc5 = UINavigationController(rootViewController: PlacesController())
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
     }
     
+    // MARK: - Helper functions
+    
     func configureTabBar() {
         
         setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
+        tabBar.barStyle = .default
         modalPresentationStyle = .fullScreen
         
         vc1.title = "Home"
@@ -39,4 +46,5 @@ class TabBarController: UITabBarController {
             items[x].image = UIImage(systemName: images[x])
         }
     }
+    
 }
