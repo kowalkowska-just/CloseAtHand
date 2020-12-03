@@ -68,6 +68,7 @@ class SignUpController: UIViewController {
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor.init(white: 1, alpha: 0.15)
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        
         return button
     }()
     
@@ -84,6 +85,7 @@ class SignUpController: UIViewController {
         button.backgroundColor = UIColor.facebookColor
         button.addSymbol(withLogo: "facebook")
         button.addTarget(self, action: #selector(handleSignUpWithFacebook), for: .touchUpInside)
+        
         return button
     }()
     
@@ -178,12 +180,9 @@ class SignUpController: UIViewController {
             
             //Save data
             guard let uid = result?.user.uid else { return }
-            
             let values = ["email": email, "fullname": fullname] as [String: Any]
             
-            Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
-                print("DEBUG: Successfully register user and saved data...")
-            }
+            UsersService.shered.saveData(values: values, uid: uid)
         }
     }
     
@@ -218,84 +217,28 @@ class SignUpController: UIViewController {
         let credential = FacebookAuthProvider.credential(withAccessToken: authenticationToken)
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
-                print("DEBUG: \(error)")
+                print("DEBUG: Failed logged in into Facebook with error: \(error)")
                 return
             }
-            print("DEBUG: Successfully logged in into Facebook.")
-            self.fetchFacebookUser()
-        }
-    }
-    
-    fileprivate func fetchFacebookUser() {
-        let token = AccessToken.current?.tokenString
-        let params = ["fields": "id, email, name, picture.type(large)"]
-        let graphRequest = GraphRequest(graphPath: "me", parameters: params, tokenString: token, version: Settings.defaultGraphAPIVersion, httpMethod: HTTPMethod.get)
-        graphRequest.start { (connection, result, error) in
-            if let err = error {
-                print("Facebook graph request error: \(err)")
-            } else {
-                print("Facebook graph request successful!")
-                
-                guard let json = result as? NSDictionary else { return }
-                
-                guard let email = json["email"] as? String,
-                      let fullname = json["name"] as? String
-//                      let id = json["id"] as? String
-                else { return }
-                
-                guard let pictureData = json["picture"] as? [String: Any],
-                      let data = pictureData["data"] as? [String: Any],
-                      let pictureURL = data["url"] as? String
-                else { return }
-
-                
-                guard let url = URL(string: pictureURL) else { return }
-                URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    if let error = error {
-                        print("DEBUG: Failed request for profile picture with error \(error)")
-                        return
-                    }
-                    guard let data = data else { return }
-                    guard let profilePicture = UIImage(data: data) else { return }
-                    
-                    self.saveUserIntoDatabase(profilePicture: profilePicture, email: email, fullname: fullname)
-                }.resume()
-            }
-        }
-    }
-    
-    func saveUserIntoDatabase(profilePicture: UIImage, email: String, fullname: String) {
-        let fileName = UUID().uuidString
-        guard let uploadData = profilePicture.jpegData(compressionQuality: 0.3) else { return }
-        let storage = Storage.storage().reference().child("profileImages").child(fileName)
-        
-        DispatchQueue.main.sync {
-            storage.putData(uploadData).observe(.success) { (snapshot) in
-                storage.downloadURL { (url, error) in
-                    if let error = error {
-                        print("DEBUG: Failed download URL with profile image with error: \(error)")
-                        return
-                    }
-                    if let profilePictureURL = url?.absoluteString {
-                        
-                        guard let uid = Auth.auth().currentUser?.uid else { return }
-                        
-                        let values = ["email": email,
-                                      "fullname": fullname,
-                                      "profilePictureURL": profilePictureURL] as [String: Any]
-                        
-                        Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
-                            
-                            if let error = error {
-                                print("DEBUG: Failed saved user into Database with erroe: \(error)")
-                            }
-                            print("DEBUG: Successfully saved user into Database")
-                            self.shouldPresentLoadingView(false)
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
+            
+            guard let id = Auth.auth().currentUser?.uid else { return }
+            let ref = Database.database().reference(withPath: "users")
+            
+            
+            ref.child(id).observeSingleEvent(of: .value, with: {(snapshot) in
+                if snapshot.exists() {
+                    //User is signing IN
+                    print("DEBUG: Successfully logged in into Facebook.")
+                    self.shouldPresentLoadingView(false)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    //User is signing UP
+                    print("DEBUG: Successfully logged up into Facebook.")
+                    UsersService.shered.fetchFacebookUser()
+                    self.shouldPresentLoadingView(false)
+                    self.dismiss(animated: true, completion: nil)
                 }
-            }
+            })
         }
     }
 }

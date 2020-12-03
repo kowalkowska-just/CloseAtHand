@@ -160,7 +160,7 @@ class WeatherWidget: UIView {
         weatherImage.dimensions(width: 60, height: 50)
         
         addSubview(rainImage)
-        rainImage.dimensions(width: 30, height: 30)
+        rainImage.dimensions(width: 22.5, height: 22.5)
         rainImage.anchor(left: leftAnchor, bottom: bottomAnchor, paddingLeft: 10, paddingBottom: 10)
         
         addSubview(probabilityOfPrecipitationLabel)
@@ -168,8 +168,8 @@ class WeatherWidget: UIView {
         probabilityOfPrecipitationLabel.anchor(left: rainImage.rightAnchor, paddingLeft: 0.8)
         
         addSubview(windImage)
-        windImage.dimensions(width: 30, height: 30)
-        windImage.anchor(left: probabilityOfPrecipitationLabel.rightAnchor, bottom: bottomAnchor, paddingLeft: 5, paddingBottom: 10)
+        windImage.dimensions(width: 22.5, height: 22.5)
+        windImage.anchor(left: probabilityOfPrecipitationLabel.rightAnchor, bottom: bottomAnchor, paddingLeft: 2.5, paddingBottom: 10)
         
         addSubview(windSpeedLabel)
         windSpeedLabel.centerY(inView: rainImage, constant: 4)

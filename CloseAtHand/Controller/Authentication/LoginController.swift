@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import FacebookCore
+import FacebookLogin
 
 class LoginController: UIViewController {
 
@@ -65,16 +67,17 @@ class LoginController: UIViewController {
     
     private let loginWithFacebookButton: AuthButton = {
         let button = AuthButton()
-        button.setTitle("Log in with Facebook", for: .normal)
+        button.setTitle("Sign in with Facebook", for: .normal)
         button.backgroundColor = UIColor.facebookColor
         button.addSymbol(withLogo: "facebook")
+        button.addTarget(self, action: #selector(handleSignInWithFacebook), for: .touchUpInside)
         
         return button
     }()
     
     private let loginWithAppleButton: AuthButton = {
         let button = AuthButton()
-        button.setTitle("Log in with Apple", for: .normal)
+        button.setTitle("Sign in with Apple", for: .normal)
         button.backgroundColor = UIColor.appleColor.withAlphaComponent(0.5)
         button.addSymbol(withLogo: "apple")
         
@@ -205,6 +208,62 @@ class LoginController: UIViewController {
                 
                 self.present(alert, animated: true, completion: nil)
             }
+        }
+    }
+    
+    @objc func handleSignInWithFacebook() {
+    
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
+            switch result {
+            case .success(granted: _, declined: _, token: _):
+                self.shouldPresentLoadingView(true, message: "Sign In..")
+                self.signIntoFirebaseWithFacebook()
+                
+            case .cancelled:
+                self.shouldPresentLoadingView(true, message: "Canceled getting Facebook user..")
+                UIView.animate(withDuration: 3.5) {
+                    self.shouldPresentLoadingView(false)
+                }
+
+            case .failed(let error):
+                self.shouldPresentLoadingView(true, message: "Failed to get Facebook user with error: \(error)")
+                UIView.animate(withDuration: 3.5) {
+                    self.shouldPresentLoadingView(false)
+                }
+            }
+        }
+    }
+    
+    //MARK: - Helper functions
+    
+    fileprivate func signIntoFirebaseWithFacebook() {
+        guard let authenticationToken = AccessToken.current?.tokenString else { return }
+        let credential = FacebookAuthProvider.credential(withAccessToken: authenticationToken)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if let error = error {
+                print("DEBUG: Failed logged in into Facebook with error: \(error)")
+                return
+            }
+            
+            guard let id = Auth.auth().currentUser?.uid else { return }
+            let ref = Database.database().reference(withPath: "users")
+            
+            
+            ref.child(id).observeSingleEvent(of: .value, with: {(snapshot) in
+                if snapshot.exists() {
+                    //User is signing IN
+                    print("DEBUG: Successfully logged in into Facebook.")
+                    self.shouldPresentLoadingView(false)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    //User is signing UP
+                    print("DEBUG: Successfully logged up into Facebook.")
+                    UsersService.shered.fetchFacebookUser()
+                    self.shouldPresentLoadingView(false)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
         }
     }
 }

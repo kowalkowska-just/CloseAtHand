@@ -24,7 +24,7 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        signOut()
+        signOut()
         configureUI()
         checkIfUserIsLoggedIn()
     }
@@ -67,40 +67,40 @@ class HomeController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(weatherWidget)
-        weatherWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
-                                 height: (heightView - 40) / 3)
+        weatherWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                                 height: (heightView - 60) / 3)
         weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-                             paddingTop: 10, paddingLeft: 10)
+                             paddingTop: 15, paddingLeft: 15)
         
         view.addSubview(calendarWidget)
-        calendarWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
-                                  height: (heightView - 40) / 3)
+        calendarWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                                  height: (heightView - 60) / 3)
         calendarWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: weatherWidget.rightAnchor,
-                              paddingTop: 10, paddingLeft: 10)
+                              paddingTop: 15, paddingLeft: 15)
         
         view.addSubview(toDoListWidget)
-        toDoListWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
-                                  height: (heightView - 40) / 3)
+        toDoListWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                                  height: (heightView - 60) / 3)
         toDoListWidget.anchor(top: weatherWidget.bottomAnchor, left: view.leftAnchor,
-                              paddingTop: 10, paddingLeft: 10)
+                              paddingTop: 15, paddingLeft: 15)
         
         view.addSubview(plannerWidget)
-        plannerWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
-                                 height: (heightView - 40) / 3)
+        plannerWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                                 height: (heightView - 60) / 3)
         plannerWidget.anchor(top: calendarWidget.bottomAnchor, left: toDoListWidget.rightAnchor,
-                             paddingTop: 10, paddingLeft: 10)
+                             paddingTop: 15, paddingLeft: 15)
         
         view.addSubview(placesWidget)
-        placesWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
-                                height: (heightView - 40) / 3)
+        placesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                                height: (heightView - 60) / 3)
         placesWidget.anchor(top: toDoListWidget.bottomAnchor, left: view.leftAnchor,
-                            paddingTop: 10, paddingLeft: 10)
+                            paddingTop: 15, paddingLeft: 15)
         
         view.addSubview(notesWidget)
-        notesWidget.dimensions(width: (view.bounds.size.width - 30) / 2,
-                               height: (heightView - 40) / 3)
+        notesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                               height: (heightView - 60) / 3)
         notesWidget.anchor(top: plannerWidget.bottomAnchor, left: placesWidget.rightAnchor,
-                           paddingTop: 10, paddingLeft: 10)
+                           paddingTop: 15, paddingLeft: 15)
     }
     
     func configureNavBar() {
