@@ -29,7 +29,10 @@ class TabBarController: UITabBarController {
     func configureTabBar() {
         
         tabBar.barTintColor = UIColor.clear
-        
+//        UITabBar.appearance().tintColor = UIColor.selectedColorInTabBar
+//        UITabBar.appearance().unselectedItemTintColor = UIColor.navigationButtonColor
+
+
         if #available(iOS 13.0, *) {
             // ios 13.0 and above
             let appearance = tabBar.standardAppearance

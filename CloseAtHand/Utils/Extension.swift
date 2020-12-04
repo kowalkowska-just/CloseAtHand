@@ -225,6 +225,7 @@ extension UIColor {
     static let backgroundColor = UIColor.rgb(red: 6, green: 38, blue: 59)
     static let tabBarColor = UIColor.rgb(red: 10, green: 48, blue: 73)
     static let navigationButtonColor = UIColor.rgb(red: 47, green: 220, blue: 220)
+    static let selectedColorInTabBar = UIColor.rgb(red: 246, green: 155, blue: 13)
     static let sectionColor = UIColor.rgb(red: 10, green: 48, blue: 73)
 
     static let facebookColor = UIColor.rgb(red: 59, green: 89, blue: 152)
