@@ -24,7 +24,7 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        signOut()
+//        signOut()
         configureUI()
         checkIfUserIsLoggedIn()
     }
@@ -64,50 +64,56 @@ class HomeController: UIViewController {
         
         configureNavBar()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundColor
         
         view.addSubview(weatherWidget)
         weatherWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                  height: (heightView - 60) / 3)
         weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                              paddingTop: 15, paddingLeft: 15)
+        weatherWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
         
         view.addSubview(calendarWidget)
         calendarWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                   height: (heightView - 60) / 3)
         calendarWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: weatherWidget.rightAnchor,
                               paddingTop: 15, paddingLeft: 15)
-        
+        calendarWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+
         view.addSubview(toDoListWidget)
         toDoListWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                   height: (heightView - 60) / 3)
         toDoListWidget.anchor(top: weatherWidget.bottomAnchor, left: view.leftAnchor,
                               paddingTop: 15, paddingLeft: 15)
-        
+        toDoListWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+
         view.addSubview(plannerWidget)
         plannerWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                  height: (heightView - 60) / 3)
         plannerWidget.anchor(top: calendarWidget.bottomAnchor, left: toDoListWidget.rightAnchor,
                              paddingTop: 15, paddingLeft: 15)
-        
-        view.addSubview(placesWidget)
-        placesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
-                                height: (heightView - 60) / 3)
-        placesWidget.anchor(top: toDoListWidget.bottomAnchor, left: view.leftAnchor,
-                            paddingTop: 15, paddingLeft: 15)
-        
+        plannerWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+
         view.addSubview(notesWidget)
         notesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
+                                height: (heightView - 60) / 3)
+        notesWidget.anchor(top: toDoListWidget.bottomAnchor, left: view.leftAnchor,
+                            paddingTop: 15, paddingLeft: 15)
+        notesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+
+        view.addSubview(placesWidget)
+        placesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                height: (heightView - 60) / 3)
-        notesWidget.anchor(top: plannerWidget.bottomAnchor, left: placesWidget.rightAnchor,
+        placesWidget.anchor(top: plannerWidget.bottomAnchor, left: notesWidget.rightAnchor,
                            paddingTop: 15, paddingLeft: 15)
+        placesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
     }
     
     func configureNavBar() {
-        configureNavigationBar(withTitle: "Home", withColor: .white)
+        configureNavigationBar(withTitle: "Home", withColor: UIColor.backgroundColor)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(handlePersonController))
-        navigationItem.rightBarButtonItem?.tintColor = .darkGray
+        navigationItem.rightBarButtonItem?.tintColor = .navigationButtonColor
     }
     
     //MARK: - Selectors

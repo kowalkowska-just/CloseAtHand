@@ -28,8 +28,26 @@ class TabBarController: UITabBarController {
     
     func configureTabBar() {
         
+        tabBar.barTintColor = UIColor.clear
+        
+        if #available(iOS 13.0, *) {
+            // ios 13.0 and above
+            let appearance = tabBar.standardAppearance
+            appearance.shadowImage = nil
+            appearance.shadowColor = nil
+            appearance.backgroundEffect = nil
+            appearance.backgroundColor = .clear
+            tabBar.standardAppearance = appearance
+        } else {
+            // below ios 13.0
+            let image = UIImage()
+            tabBar.shadowImage = image
+            tabBar.backgroundImage = image
+            tabBar.backgroundColor = .clear
+        }
+        
         setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
-        tabBar.barStyle = .default
+        tabBar.barStyle = .black
         modalPresentationStyle = .fullScreen
         
         vc1.title = "Home"

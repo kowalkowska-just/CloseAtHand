@@ -10,7 +10,11 @@ import UIKit
 class ToDoListWidget: UIView {
 
     // MARK: - Properties
-
+    
+    private lazy var titleView: UIView = {
+        let view = UIView().inputContainerViewForTitle(title: "To Do List", backgroundColor: .toDoListColor)
+        return view
+    }()
     
     // MARK: - Lifecycle
     
@@ -27,9 +31,17 @@ class ToDoListWidget: UIView {
     // MARK: - Helper Functions
     
     func configureUI() {
-        backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
-        layer.cornerRadius = 10
+        backgroundColor = UIColor.sectionColor
         addShadow()
+        
+        addSubview(titleView)
+        titleView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
+        titleView.dimensions(height: 40)
+
+        let separator0 = UIView().createSeparator(color: .white)
+        separator0.addShadow()
+        addSubview(separator0)
+        separator0.anchor(top: titleView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 0, paddingRight: 0)
     }
     
     // MARK: - Selectors

@@ -114,9 +114,19 @@ extension UIView {
         layer.masksToBounds = false
     }
     
+    //MARK: - Corner Radius
+    
+    func roundCorners(_ corners: CACornerMask, radius: CGFloat, borderColor: UIColor = .clear, borderWidth: CGFloat = 0) {
+        self.layer.maskedCorners = corners
+        self.layer.cornerRadius = radius
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.cgColor
+
+    }
+    
     //MARK: - ContainerView for UITextField in Login/SignUp Controller
     
-    func inputContainerView(image: UIImage, textField: UITextField) -> UIView {
+    func inputContainerViewForTextField(image: UIImage, textField: UITextField) -> UIView {
         let view = UIView()
         
         let imageView = UIImageView()
@@ -139,6 +149,23 @@ extension UIView {
         separationView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         separationView.dimensions(height: 1)
         
+        return view
+    }
+    
+    func inputContainerViewForTitle(title: String, backgroundColor: UIColor) -> UIView {
+        let view = UIView()
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 26)
+        titleLabel.textAlignment = .left
+        titleLabel.addShadow()
+        
+        view.addSubview(titleLabel)
+        view.backgroundColor = backgroundColor
+        titleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 10)
+        titleLabel.dimensions(height: 30)
+    
         return view
     }
     
@@ -194,12 +221,23 @@ extension UIColor {
     
     static let topColorGradient = UIColor.rgb(red: 19, green: 103, blue: 129)
     static let bottomColorGradient = UIColor.rgb(red: 88, green: 36, blue: 76)
+    
+    static let backgroundColor = UIColor.rgb(red: 6, green: 38, blue: 59)
+    static let tabBarColor = UIColor.rgb(red: 10, green: 48, blue: 73)
+    static let navigationButtonColor = UIColor.rgb(red: 47, green: 220, blue: 220)
+    static let sectionColor = UIColor.rgb(red: 10, green: 48, blue: 73)
+
     static let facebookColor = UIColor.rgb(red: 59, green: 89, blue: 152)
     static let appleColor = UIColor.rgb(red: 25, green: 25, blue: 25)
-    static let weatherTopColor = UIColor.rgb(red: 7, green: 163, blue: 178)
-    static let weatherBottomColor = UIColor.rgb(red: 217, green: 236, blue: 199)
-
-
+    
+    static let weatherColor = UIColor.rgb(red: 2, green: 110, blue: 125)
+    static let calendarColor = UIColor.rgb(red: 54, green: 147, blue: 148)
+    
+    static let toDoListColor = UIColor.rgb(red: 152, green: 196, blue: 160)
+    static let plannerColor = UIColor.rgb(red: 249, green: 201, blue: 147)
+    
+    static let notesColor = UIColor.rgb(red: 240, green: 97, blue: 92)
+    static let placesColor = UIColor.rgb(red: 246, green: 135, blue: 137)
 }
 
 //MARK: - UITextField
@@ -316,10 +354,11 @@ extension UIViewController {
     }
     
     func configureNavigationBar(withTitle title: String, withColor color: UIColor) {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationItem.title = title
         
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = color
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = color
     }
 }

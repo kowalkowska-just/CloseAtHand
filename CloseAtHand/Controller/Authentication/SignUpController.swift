@@ -41,7 +41,7 @@ class SignUpController: UIViewController {
     }()
     
     private lazy var emailContainerView: UIView = {
-        let emailView = UIView().inputContainerView(image: UIImage(systemName: "envelope")!,
+        let emailView = UIView().inputContainerViewForTextField(image: UIImage(systemName: "envelope")!,
                                                     textField: emailTextField)
         emailView.dimensions(height: 40)
         
@@ -49,7 +49,7 @@ class SignUpController: UIViewController {
     }()
     
     private lazy var fullnameContainerView: UIView = {
-        let fullnameView = UIView().inputContainerView(image: UIImage(systemName: "person")!,
+        let fullnameView = UIView().inputContainerViewForTextField(image: UIImage(systemName: "person")!,
                                                     textField: fullnameTextField)
         fullnameView.dimensions(height: 40)
         
@@ -57,7 +57,7 @@ class SignUpController: UIViewController {
     }()
     
     private lazy var passwordContainerView: UIView = {
-        let passwordView = UIView().inputContainerView(image: UIImage(systemName: "lock")!,
+        let passwordView = UIView().inputContainerViewForTextField(image: UIImage(systemName: "lock")!,
                                                        textField: passwordTextField)
         passwordView.dimensions(height: 40)
         return passwordView

@@ -11,6 +11,11 @@ class WeatherWidget: UIView {
 
     // MARK: - Properties
     
+    private lazy var titleView: UIView = {
+        let view = UIView().inputContainerViewForTitle(title: "Weather", backgroundColor: .weatherColor)
+        return view
+    }()
+    
     private let cityLabel: UILabel = {
         let label = UILabel()
         label.text = "Gdańsk"
@@ -133,12 +138,20 @@ class WeatherWidget: UIView {
     // MARK: - Helper Functions
     
     func configureUI() {
-        backgroundColor = UIColor.weatherTopColor.withAlphaComponent(0.5)
-        layer.cornerRadius = 10
+        backgroundColor = UIColor.sectionColor
         addShadow()
         
+        addSubview(titleView)
+        titleView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
+        titleView.dimensions(height: 40)
+
+        let separator0 = UIView().createSeparator(color: .white)
+        separator0.addShadow()
+        addSubview(separator0)
+        separator0.anchor(top: titleView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 0, paddingRight: 0)
+        
         addSubview(locationContainerView)
-        locationContainerView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 10, paddingLeft: 10)
+        locationContainerView.anchor(top: separator0.bottomAnchor, left: leftAnchor, paddingTop: 5, paddingLeft: 10)
         locationContainerView.dimensions(height: 40)
         
         addSubview(weatherButton)
@@ -146,13 +159,12 @@ class WeatherWidget: UIView {
         weatherButton.anchor(left: locationContainerView.rightAnchor, right: rightAnchor, paddingLeft: 10, paddingRight: 10)
         weatherButton.centerY(inView: locationContainerView)
         
-        let separator1 = UIView().createSeparator(color: .white)
+        let separator1 = UIView().createSeparator(color: .weatherColor)
         addSubview(separator1)
         separator1.anchor(top: locationContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 10, paddingRight: 10)
         
         addSubview(temperatureLabel)
-        temperatureLabel.anchor(left: leftAnchor, paddingTop: 14, paddingLeft: 10)
-        temperatureLabel.centerY(inView: self)
+        temperatureLabel.anchor(top: separator1.bottomAnchor, left: leftAnchor, paddingTop: 14, paddingLeft: 10)
         
         addSubview(weatherImage)
         weatherImage.centerY(inView: temperatureLabel)
@@ -183,7 +195,7 @@ class WeatherWidget: UIView {
         celciusButton.anchor(bottom: bottomAnchor, right: fahrenheitButton.leftAnchor, paddingBottom: 10)
         celciusButton.dimensions(width: 19, height: 19)
         
-        let separator2 = UIView().createSeparator(color: .white)
+        let separator2 = UIView().createSeparator(color: .weatherColor)
         addSubview(separator2)
         separator2.anchor( left: leftAnchor, bottom: rainImage.topAnchor, right: rightAnchor, paddingLeft: 10, paddingBottom: 10, paddingRight: 10)
     }
