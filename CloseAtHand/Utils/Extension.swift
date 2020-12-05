@@ -110,7 +110,7 @@ extension UIView {
     func addShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 3, height: 1.5)
+        layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.masksToBounds = false
     }
     
@@ -152,19 +152,33 @@ extension UIView {
         return view
     }
     
-    func inputContainerViewForTitle(title: String, backgroundColor: UIColor) -> UIView {
+    func inputContainerViewForTitle(title: String, imageColor color: String, image: String) -> UIView {
         let view = UIView()
+        
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textColor = .white
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 26)
+        titleLabel.textColor = UIColor.init(named: Constatnt.textColor)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
         titleLabel.textAlignment = .left
-        titleLabel.addShadow()
+      //  titleLabel.addShadow()
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: image)
+        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor.init(named: color)
+        imageView.addShadow()
+        
+        view.addSubview(imageView)
+        imageView.dimensions(width: 30, height: 30)
+        imageView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 10)
         
         view.addSubview(titleLabel)
-        view.backgroundColor = backgroundColor
-        titleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 10)
-        titleLabel.dimensions(height: 30)
+        view.backgroundColor = UIColor.init(named: Constatnt.secendaryBackgroundColor)
+        titleLabel.anchor(left: imageView.rightAnchor, paddingLeft: 10)
+        titleLabel.centerY(inView: imageView)
+        titleLabel.dimensions(height: 25)
+        
+        view.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 4.5)
     
         return view
     }
@@ -221,24 +235,9 @@ extension UIColor {
     
     static let topColorGradient = UIColor.rgb(red: 19, green: 103, blue: 129)
     static let bottomColorGradient = UIColor.rgb(red: 88, green: 36, blue: 76)
-    
-    static let backgroundColor = UIColor.rgb(red: 6, green: 38, blue: 59)
-    static let tabBarColor = UIColor.rgb(red: 10, green: 48, blue: 73)
-    static let navigationButtonColor = UIColor.rgb(red: 47, green: 220, blue: 220)
-    static let selectedColorInTabBar = UIColor.rgb(red: 246, green: 155, blue: 13)
-    static let sectionColor = UIColor.rgb(red: 10, green: 48, blue: 73)
 
     static let facebookColor = UIColor.rgb(red: 59, green: 89, blue: 152)
     static let appleColor = UIColor.rgb(red: 25, green: 25, blue: 25)
-    
-    static let weatherColor = UIColor.rgb(red: 2, green: 110, blue: 125)
-    static let calendarColor = UIColor.rgb(red: 54, green: 147, blue: 148)
-    
-    static let toDoListColor = UIColor.rgb(red: 152, green: 196, blue: 160)
-    static let plannerColor = UIColor.rgb(red: 249, green: 201, blue: 147)
-    
-    static let notesColor = UIColor.rgb(red: 240, green: 97, blue: 92)
-    static let placesColor = UIColor.rgb(red: 246, green: 135, blue: 137)
 }
 
 //MARK: - UITextField
@@ -355,7 +354,7 @@ extension UIViewController {
     }
     
     func configureNavigationBar(withTitle title: String, withColor color: UIColor) {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.init(named: Constatnt.textColor), NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationItem.title = title
         
         navigationController?.navigationBar.shadowImage = UIImage()

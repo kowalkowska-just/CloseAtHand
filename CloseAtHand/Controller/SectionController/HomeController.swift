@@ -64,56 +64,63 @@ class HomeController: UIViewController {
         
         configureNavBar()
         
-        view.backgroundColor = .backgroundColor
-        
+        view.backgroundColor = UIColor.init(named: Constatnt.backgroundColor)
+
         view.addSubview(weatherWidget)
         weatherWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                  height: (heightView - 60) / 3)
         weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                              paddingTop: 15, paddingLeft: 15)
-        weatherWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        weatherWidget.layer.cornerRadius = 4.5
+//        weatherWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
         
         view.addSubview(calendarWidget)
         calendarWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                   height: (heightView - 60) / 3)
         calendarWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: weatherWidget.rightAnchor,
                               paddingTop: 15, paddingLeft: 15)
-        calendarWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        calendarWidget.layer.cornerRadius = 4.5
+//        calendarWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(toDoListWidget)
         toDoListWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                   height: (heightView - 60) / 3)
         toDoListWidget.anchor(top: weatherWidget.bottomAnchor, left: view.leftAnchor,
                               paddingTop: 15, paddingLeft: 15)
-        toDoListWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        toDoListWidget.layer.cornerRadius = 4.5
+//        toDoListWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(plannerWidget)
         plannerWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                  height: (heightView - 60) / 3)
         plannerWidget.anchor(top: calendarWidget.bottomAnchor, left: toDoListWidget.rightAnchor,
                              paddingTop: 15, paddingLeft: 15)
-        plannerWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        plannerWidget.layer.cornerRadius = 4.5
+//        plannerWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(notesWidget)
         notesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                 height: (heightView - 60) / 3)
         notesWidget.anchor(top: toDoListWidget.bottomAnchor, left: view.leftAnchor,
                             paddingTop: 15, paddingLeft: 15)
-        notesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        notesWidget.layer.cornerRadius = 4.5
+//        notesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(placesWidget)
         placesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
                                height: (heightView - 60) / 3)
         placesWidget.anchor(top: plannerWidget.bottomAnchor, left: notesWidget.rightAnchor,
                            paddingTop: 15, paddingLeft: 15)
-        placesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        placesWidget.layer.cornerRadius = 4.5
+//        placesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
     }
     
     func configureNavBar() {
-        configureNavigationBar(withTitle: "Home", withColor: UIColor.backgroundColor)
+        configureNavigationBar(withTitle: "Home", withColor: UIColor.init(named: Constatnt.backgroundColor)!)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(handlePersonController))
-        navigationItem.rightBarButtonItem?.tintColor = .navigationButtonColor
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .plain, target: self, action: #selector(handlePersonController))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.init(named: Constatnt.textColor)
+        
     }
     
     //MARK: - Selectors
