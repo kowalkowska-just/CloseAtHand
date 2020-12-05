@@ -53,12 +53,6 @@ class TabBarController: UITabBarController {
         tabBar.barStyle = .black
         modalPresentationStyle = .fullScreen
         
-        vc1.title = "Home"
-        vc2.title = "To Do List"
-        vc3.title = "Planner"
-        vc4.title = "Notes"
-        vc5.title = "Places"
-        
         guard let items = self.tabBar.items else { return }
         
         let images = [Constant.homeIconCircle, Constant.toDoListIconCircle, Constant.plannerIconCircle, Constant.notesIconCircle, Constant.placesIconCircle]
