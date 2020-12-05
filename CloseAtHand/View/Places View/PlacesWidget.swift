@@ -36,12 +36,6 @@ class PlacesWidget: UIView {
         
         addSubview(titleView)
         titleView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
-        titleView.dimensions(height: 40)
-
-        let separator0 = UIView().createSeparator(color: UIColor.init(named: Constant.placesColor)!)
-        separator0.addShadow()
-        addSubview(separator0)
-        separator0.anchor(top: titleView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 0, paddingRight: 0)
     }
     
     // MARK: - Selectors

@@ -10,7 +10,6 @@ import Foundation
 struct Constant {
     
     //COLORS
-    
     static let backgroundColor = "systemBackground-color"
     static let secendaryBackgroundColor = "secendarySystemBackground-color"
     static let buttonBackgroundColor = "buttonBackground-color"
@@ -51,4 +50,6 @@ struct Constant {
     static let placesIcon = "places-icon"
     static let placesIconCircle = "places-circle"
     static let placesIconSelected = "places-circle-selected"
+    
+    static let personIcon = "person-icon"
 }

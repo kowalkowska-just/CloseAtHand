@@ -119,20 +119,15 @@ class HomeController: UIViewController {
         configureNavigationBar(withTitle: "Home", withColor: UIColor.init(named: Constant.backgroundColor)!)
         
         if let navigationBar = self.navigationController?.navigationBar {
-            let buttonFrame = CGRect(x: navigationBar.frame.width - 50, y: 10, width: 30, height: 30)
-
-            let personButton = UIButton(frame: buttonFrame)
-            personButton.setImage(UIImage(systemName: "person.circle.fill"), for: .normal)
-            personButton.imageView?.contentMode = .scaleAspectFill
+            
+            let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height - 15, y: 10, width: navigationBar.frame.height - 10, height: navigationBar.frame.height - 10)
+            
+            let personButton = UIButton.init(frame: buttonFrame)
+            personButton.setImage(UIImage(named: Constant.personIcon)?.withRenderingMode(.alwaysTemplate), for: .normal)
             personButton.tintColor = UIColor.init(named: Constant.textColor)!
-            personButton.addTarget(self, action: #selector(handlePersonController), for: .touchUpInside)
-
+            
             navigationBar.addSubview(personButton)
         }
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .plain, target: self, action: #selector(handlePersonController))
-//        navigationItem.rightBarButtonItem?.tintColor = UIColor.init(named: Constant.textColor)
-        
     }
     
     //MARK: - Selectors

@@ -160,16 +160,14 @@ extension UIView {
         titleLabel.textColor = UIColor.init(named: Constant.textColor)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
         titleLabel.textAlignment = .left
-      //  titleLabel.addShadow()
         
         let imageView = UIImageView()
         imageView.image = UIImage(named: image)
         imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor.init(named: color)
-        imageView.addShadow()
         
         view.addSubview(imageView)
-        imageView.dimensions(width: 30, height: 30)
+        imageView.dimensions(width: 23, height: 23)
         imageView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 10)
         
         view.addSubview(titleLabel)
@@ -178,7 +176,14 @@ extension UIView {
         titleLabel.centerY(inView: imageView)
         titleLabel.dimensions(height: 25)
         
+        let separator0 = UIView().createSeparator(color: UIColor.init(named: color)!)
+        separator0.addShadow()
+        
+        view.addSubview(separator0)
+        separator0.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
         view.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 4.5)
+        view.dimensions(height: 32)
     
         return view
     }
