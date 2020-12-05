@@ -369,5 +369,6 @@ extension UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = color
+        
     }
 }
