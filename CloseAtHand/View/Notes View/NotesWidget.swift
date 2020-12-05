@@ -12,7 +12,7 @@ class NotesWidget: UIView {
     // MARK: - Properties
     
     private lazy var titleView: UIView = {
-        let view = UIView().inputContainerViewForTitle(title: "Notes", imageColor: Constatnt.notesColor, image: Constatnt.notesIcon)
+        let view = UIView().inputContainerViewForTitle(title: "Notes", imageColor: Constant.notesColor, image: Constant.notesIcon)
         return view
     }()
     
@@ -31,14 +31,14 @@ class NotesWidget: UIView {
     // MARK: - Helper Functions
     
     func configureUI() {
-        backgroundColor = UIColor.init(named: Constatnt.secendaryBackgroundColor)
+        backgroundColor = UIColor.init(named: Constant.secendaryBackgroundColor)
         addShadow()
         
         addSubview(titleView)
         titleView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         titleView.dimensions(height: 40)
 
-        let separator0 = UIView().createSeparator(color: UIColor.init(named: Constatnt.notesColor)!)
+        let separator0 = UIView().createSeparator(color: UIColor.init(named: Constant.notesColor)!)
         separator0.addShadow()
         addSubview(separator0)
         separator0.anchor(top: titleView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 0, paddingRight: 0)

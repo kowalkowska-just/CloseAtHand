@@ -136,7 +136,7 @@ extension UIView {
         
         view.addSubview(imageView)
         imageView.anchor(left: view.leftAnchor)
-        imageView.dimensions(width: 18, height: 18)
+        imageView.dimensions(width: 15, height: 15)
         imageView.centerY(inView: view)
         
         view.addSubview(textField)
@@ -157,7 +157,7 @@ extension UIView {
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textColor = UIColor.init(named: Constatnt.textColor)
+        titleLabel.textColor = UIColor.init(named: Constant.textColor)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
         titleLabel.textAlignment = .left
       //  titleLabel.addShadow()
@@ -173,7 +173,7 @@ extension UIView {
         imageView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingTop: 5, paddingLeft: 10)
         
         view.addSubview(titleLabel)
-        view.backgroundColor = UIColor.init(named: Constatnt.secendaryBackgroundColor)
+        view.backgroundColor = UIColor.init(named: Constant.secendaryBackgroundColor)
         titleLabel.anchor(left: imageView.rightAnchor, paddingLeft: 10)
         titleLabel.centerY(inView: imageView)
         titleLabel.dimensions(height: 25)
@@ -354,7 +354,7 @@ extension UIViewController {
     }
     
     func configureNavigationBar(withTitle title: String, withColor color: UIColor) {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.init(named: Constatnt.textColor), NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.init(named: Constant.textColor)!, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationItem.title = title
         
         navigationController?.navigationBar.shadowImage = UIImage()

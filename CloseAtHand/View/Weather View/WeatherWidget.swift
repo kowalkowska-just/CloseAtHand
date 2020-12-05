@@ -12,14 +12,14 @@ class WeatherWidget: UIView {
     // MARK: - Properties
     
     private lazy var titleView: UIView = {
-        let view = UIView().inputContainerViewForTitle(title: "Weather", imageColor: Constatnt.weatherColor, image: Constatnt.weatherIcon)
+        let view = UIView().inputContainerViewForTitle(title: "Weather", imageColor: Constant.weatherColor, image: Constant.weatherIcon)
         return view
     }()
     
     private let cityLabel: UILabel = {
         let label = UILabel()
         label.text = "Gdańsk"
-        label.textColor = UIColor.init(named: Constatnt.textColor)
+        label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .left
         
@@ -29,7 +29,7 @@ class WeatherWidget: UIView {
     private let cantryLabel: UILabel = {
         let label = UILabel()
         label.text = "POLAND"
-        label.textColor = UIColor.init(named: Constatnt.textColor)
+        label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
         
@@ -50,7 +50,7 @@ class WeatherWidget: UIView {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = UIColor.init(named: Constatnt.textColor)
+        button.tintColor = UIColor.init(named: Constant.textColor)
         button.addTarget(self, action: #selector(handleShowWeathercontroller), for: .touchUpInside)
         return button
     }()
@@ -58,7 +58,7 @@ class WeatherWidget: UIView {
     private var temperatureLabel: UILabel = {
         let label = UILabel()
         label.text = "19°"
-        label.textColor = UIColor.init(named: Constatnt.textColor)
+        label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.systemFont(ofSize: 48)
         
         return label
@@ -67,7 +67,7 @@ class WeatherWidget: UIView {
     private var weatherImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "cloud.sun")
-        image.tintColor = UIColor.init(named: Constatnt.textColor)
+        image.tintColor = UIColor.init(named: Constant.textColor)
         image.contentMode = .scaleAspectFill
         
         return image
@@ -76,7 +76,7 @@ class WeatherWidget: UIView {
     private let rainImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "cloud.rain")
-        image.tintColor = UIColor.init(named: Constatnt.textColor)
+        image.tintColor = UIColor.init(named: Constant.textColor)
         image.contentMode = .scaleAspectFit
         
         return image
@@ -85,7 +85,7 @@ class WeatherWidget: UIView {
     private var probabilityOfPrecipitationLabel: UILabel = {
         let label = UILabel()
         label.text = "25%"
-        label.textColor = UIColor.init(named: Constatnt.textColor)
+        label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
@@ -93,7 +93,7 @@ class WeatherWidget: UIView {
     private let windImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "wind")
-        image.tintColor = UIColor.init(named: Constatnt.textColor)
+        image.tintColor = UIColor.init(named: Constant.textColor)
         image.contentMode = .scaleAspectFit
 
         return image
@@ -102,7 +102,7 @@ class WeatherWidget: UIView {
     private var windSpeedLabel: UILabel = {
         let label = UILabel()
         label.text = "11 km/h"
-        label.textColor = UIColor.init(named: Constatnt.textColor)
+        label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
@@ -110,7 +110,7 @@ class WeatherWidget: UIView {
     private let celciusButton: UIButton = {
         let button = UIButton()
         button.setTitle("°C", for: .normal)
-        button.setTitleColor(UIColor.init(named: Constatnt.textColor) ?? .white, for: .normal)
+        button.setTitleColor(UIColor.init(named: Constant.textColor) ?? .white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return button
     }()
@@ -118,7 +118,7 @@ class WeatherWidget: UIView {
     private let fahrenheitButton: UIButton = {
         let button = UIButton()
         button.setTitle("°F", for: .normal)
-        button.setTitleColor(UIColor.init(named: Constatnt.textColor) ?? .white, for: .normal)
+        button.setTitleColor(UIColor.init(named: Constant.textColor) ?? .white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return button
     }()
@@ -138,14 +138,14 @@ class WeatherWidget: UIView {
     // MARK: - Helper Functions
     
     func configureUI() {
-        backgroundColor = UIColor.init(named: Constatnt.secendaryBackgroundColor)
+        backgroundColor = UIColor.init(named: Constant.secendaryBackgroundColor)
         addShadow()
         
         addSubview(titleView)
         titleView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         titleView.dimensions(height: 40)
 
-        let separator0 = UIView().createSeparator(color: UIColor.init(named: Constatnt.weatherColor)!)
+        let separator0 = UIView().createSeparator(color: UIColor.init(named: Constant.weatherColor)!)
         separator0.addShadow()
         addSubview(separator0)
         separator0.anchor(top: titleView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 0, paddingRight: 0)
@@ -159,7 +159,7 @@ class WeatherWidget: UIView {
         weatherButton.anchor(left: locationContainerView.rightAnchor, right: rightAnchor, paddingLeft: 10, paddingRight: 10)
         weatherButton.centerY(inView: locationContainerView)
         
-        let separator1 = UIView().createSeparator(color: UIColor.init(named: Constatnt.textColor) ?? .white)
+        let separator1 = UIView().createSeparator(color: UIColor.init(named: Constant.textColor) ?? .white)
         addSubview(separator1)
         separator1.anchor(top: locationContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 10, paddingRight: 10)
         
@@ -195,7 +195,7 @@ class WeatherWidget: UIView {
         celciusButton.anchor(bottom: bottomAnchor, right: fahrenheitButton.leftAnchor, paddingBottom: 10)
         celciusButton.dimensions(width: 19, height: 19)
         
-        let separator2 = UIView().createSeparator(color: UIColor.init(named: Constatnt.textColor) ?? .white)
+        let separator2 = UIView().createSeparator(color: UIColor.init(named: Constant.textColor) ?? .white)
         addSubview(separator2)
         separator2.anchor( left: leftAnchor, bottom: rainImage.topAnchor, right: rightAnchor, paddingLeft: 10, paddingBottom: 10, paddingRight: 10)
     }

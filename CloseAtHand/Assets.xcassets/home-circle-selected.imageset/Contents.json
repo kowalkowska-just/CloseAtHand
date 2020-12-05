@@ -25,7 +25,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "calendarIconDarkSelected-1.png",
+      "filename" : "icons8-home-100 (3)-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -36,7 +36,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "calendarIconLightSelected.png",
+      "filename" : "icons8-home-100 (4).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -47,7 +47,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "calendarIconDarkSelected.png",
+      "filename" : "icons8-home-100 (3).png",
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Constatnt {
+struct Constant {
     
     //COLORS
     
@@ -24,6 +24,9 @@ struct Constatnt {
     static let placesColor = "places-color"
     
     //ICONS
+    static let homeIcon = "home-icon"
+    static let homeIconCircle = "home-circle"
+    static let homeIconSelected = "home-circle-selected"
     
     static let weatherIcon = "weather-icon"
     static let weatherIconCircle = "weather-circle"

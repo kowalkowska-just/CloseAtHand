@@ -61,11 +61,14 @@ class TabBarController: UITabBarController {
         
         guard let items = self.tabBar.items else { return }
         
-        let images = ["house", "checkmark.square", "calendar", "square.and.pencil", "pin"]
+        let images = [Constant.homeIconCircle, Constant.toDoListIconCircle, Constant.plannerIconCircle, Constant.notesIconCircle, Constant.placesIconCircle]
+        
+        let imagesSelected = [Constant.homeIconSelected, Constant.toDoListIconSelected, Constant.plannerIconSelected, Constant.notesIconSelected, Constant.placesIconSelected]
         
         for x in 0..<items.count {
-            items[x].image = UIImage(systemName: images[x])
+            items[x].image = UIImage(named: images[x])!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+            items[x].selectedImage = UIImage(named: imagesSelected[x])!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+            items[x].title = nil
         }
     }
-    
 }

@@ -64,7 +64,7 @@ class HomeController: UIViewController {
         
         configureNavBar()
         
-        view.backgroundColor = UIColor.init(named: Constatnt.backgroundColor)
+        view.backgroundColor = UIColor.init(named: Constant.backgroundColor)
 
         view.addSubview(weatherWidget)
         weatherWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -116,10 +116,10 @@ class HomeController: UIViewController {
     }
     
     func configureNavBar() {
-        configureNavigationBar(withTitle: "Home", withColor: UIColor.init(named: Constatnt.backgroundColor)!)
+        configureNavigationBar(withTitle: "Home", withColor: UIColor.init(named: Constant.backgroundColor)!)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .plain, target: self, action: #selector(handlePersonController))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.init(named: Constatnt.textColor)
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.init(named: Constant.textColor)
         
     }
     
