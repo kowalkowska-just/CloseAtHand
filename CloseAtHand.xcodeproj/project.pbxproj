@@ -160,7 +160,6 @@
 		D10CE5ED257707720080AC40 /* SectionController */ = {
 			isa = PBXGroup;
 			children = (
-				D16C08C1257061E500D16F2C /* HomeController.swift */,
 				D10CE5EE2577079F0080AC40 /* WeatherController.swift */,
 				D10CE5F3257707CA0080AC40 /* ToDoListController.swift */,
 				D10CE5F8257708020080AC40 /* PlannerController.swift */,
@@ -280,6 +279,7 @@
 		D16C086F256FE24700D16F2C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D16C08C1257061E500D16F2C /* HomeController.swift */,
 				D10CE5ED257707720080AC40 /* SectionController */,
 				D10CE5E92577074A0080AC40 /* Authentication */,
 				D10CE60725770E720080AC40 /* TabBarController.swift */,

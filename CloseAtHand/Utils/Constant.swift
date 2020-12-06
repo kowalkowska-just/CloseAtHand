@@ -52,4 +52,6 @@ struct Constant {
     static let placesIconSelected = "places-circle-selected"
     
     static let personIcon = "person-icon"
+    static let menuIcon = "menu-icon"
+    static let plusIcon = "plus-icon"
 }

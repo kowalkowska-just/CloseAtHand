@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol WeatherWidgetDelegate: class {
+    func showWeatherController()
+}
+
 class WeatherWidget: UIView {
 
     // MARK: - Properties
+    
+    weak var delegate: WeatherWidgetDelegate?
     
     private lazy var titleView: UIView = {
         let view = UIView().inputContainerViewForTitle(title: "Weather", imageColor: Constant.weatherColor, image: Constant.weatherIcon)
@@ -51,7 +57,7 @@ class WeatherWidget: UIView {
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = UIColor.init(named: Constant.textColor)
-        button.addTarget(self, action: #selector(handleShowWeathercontroller), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleShowWeatherController), for: .touchUpInside)
         return button
     }()
     
@@ -217,7 +223,8 @@ class WeatherWidget: UIView {
     
     // MARK: - Selectors
 
-    @objc func handleShowWeathercontroller() {
+    @objc func handleShowWeatherController() {
         
+        delegate?.showWeatherController()
     }
 }

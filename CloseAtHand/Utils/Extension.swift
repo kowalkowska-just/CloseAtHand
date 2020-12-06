@@ -361,19 +361,19 @@ extension UIViewController {
     func configureNavigationBar(withTitle title: String, withColor color: UIColor) {
         
         if let navigationBar = self.navigationController?.navigationBar {
-            let titleFrame = CGRect(x: 20, y: 10, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
-
-            let titleLabel = UILabel(frame: titleFrame)
+            let titleLabel = UILabel()
             titleLabel.text = title
             titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
             titleLabel.tintColor = UIColor.init(named: Constant.textColor)!
-
-            navigationBar.addSubview(titleLabel)
+        
+            navigationController?.navigationBar.addSubview(titleLabel)
+            titleLabel.centerX(inView: navigationBar)
+            titleLabel.centerY(inView: navigationBar, constant: 12)
+        
         }
         
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = color
-        
     }
 }

@@ -19,6 +19,8 @@ class HomeController: UIViewController {
     let placesWidget = PlacesWidget()
     let notesWidget = NotesWidget()
     
+    
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -72,7 +74,7 @@ class HomeController: UIViewController {
         weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                              paddingTop: 15, paddingLeft: 15)
         weatherWidget.layer.cornerRadius = 4.5
-//        weatherWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
+        weatherWidget.delegate = self
         
         view.addSubview(calendarWidget)
         calendarWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -80,7 +82,6 @@ class HomeController: UIViewController {
         calendarWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: weatherWidget.rightAnchor,
                               paddingTop: 15, paddingLeft: 15)
         calendarWidget.layer.cornerRadius = 4.5
-//        calendarWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(toDoListWidget)
         toDoListWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -88,7 +89,6 @@ class HomeController: UIViewController {
         toDoListWidget.anchor(top: weatherWidget.bottomAnchor, left: view.leftAnchor,
                               paddingTop: 15, paddingLeft: 15)
         toDoListWidget.layer.cornerRadius = 4.5
-//        toDoListWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(plannerWidget)
         plannerWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -96,7 +96,6 @@ class HomeController: UIViewController {
         plannerWidget.anchor(top: calendarWidget.bottomAnchor, left: toDoListWidget.rightAnchor,
                              paddingTop: 15, paddingLeft: 15)
         plannerWidget.layer.cornerRadius = 4.5
-//        plannerWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(notesWidget)
         notesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -104,7 +103,6 @@ class HomeController: UIViewController {
         notesWidget.anchor(top: toDoListWidget.bottomAnchor, left: view.leftAnchor,
                             paddingTop: 15, paddingLeft: 15)
         notesWidget.layer.cornerRadius = 4.5
-//        notesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
 
         view.addSubview(placesWidget)
         placesWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -112,7 +110,6 @@ class HomeController: UIViewController {
         placesWidget.anchor(top: plannerWidget.bottomAnchor, left: notesWidget.rightAnchor,
                            paddingTop: 15, paddingLeft: 15)
         placesWidget.layer.cornerRadius = 4.5
-//        placesWidget.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 20)
     }
     
     func configureNavBar() {
@@ -120,7 +117,7 @@ class HomeController: UIViewController {
         
         if let navigationBar = self.navigationController?.navigationBar {
             
-            let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height - 15, y: 10, width: navigationBar.frame.height - 10, height: navigationBar.frame.height - 10)
+            let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height, y: 20, width: navigationBar.frame.height - 20, height: navigationBar.frame.height - 20)
             
             let personButton = UIButton.init(frame: buttonFrame)
             personButton.setImage(UIImage(named: Constant.personIcon)?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -136,3 +133,15 @@ class HomeController: UIViewController {
         
     }
 }
+
+//MARK: - WeatherWidgetDelegate
+
+extension HomeController: WeatherWidgetDelegate {
+    func showWeatherController() {
+        
+        print("Show Weather Controller")
+        let controller = UINavigationController(rootViewController: WeatherController())
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
+        }
+    }
