@@ -117,7 +117,7 @@ class HomeController: UIViewController {
         
         if let navigationBar = self.navigationController?.navigationBar {
             
-            let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height, y: 20, width: navigationBar.frame.height - 20, height: navigationBar.frame.height - 20)
+            let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height, y: 20, width: navigationBar.frame.height - 16, height: navigationBar.frame.height - 16)
             
             let personButton = UIButton.init(frame: buttonFrame)
             personButton.setImage(UIImage(named: Constant.personIcon)?.withRenderingMode(.alwaysTemplate), for: .normal)

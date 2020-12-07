@@ -54,4 +54,6 @@ struct Constant {
     static let personIcon = "person-icon"
     static let menuIcon = "menu-icon"
     static let plusIcon = "plus-icon"
+    static let backIcon = "back-icon"
 }
+
