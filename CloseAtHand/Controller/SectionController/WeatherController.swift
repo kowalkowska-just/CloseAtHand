@@ -15,6 +15,9 @@ class WeatherController: UIViewController {
         let image = UIImageView()
         image.image = UIImage(named: Constant.placeIcon)
         image.tintColor = UIColor(named: Constant.textColor)
+        image.contentMode = .scaleAspectFit
+        image.image = image.image?.withRenderingMode(.alwaysTemplate)
+
         return image
     }()
     
@@ -25,27 +28,21 @@ class WeatherController: UIViewController {
         label.tintColor = UIColor(named: Constant.textColor)
         return label
     }()
-    
-    private let dateAndTimeView: UIView = {
-        let viewDate = UIView()
         
-        let labelDate = UILabel()
-        labelDate.text = "Web, December 9"
-        labelDate.font = UIFont.systemFont(ofSize: 10)
-        labelDate.tintColor = UIColor(named: Constant.textColor)
-        
-        let labelTime = UILabel()
-        labelTime.text = "20:36"
-        labelTime.font = UIFont.systemFont(ofSize: 10)
-        labelTime.tintColor = UIColor(named: Constant.textColor)
-        
-        viewDate.addSubview(labelDate)
-        labelDate.anchor(top: viewDate.topAnchor, left: viewDate.leftAnchor)
-        
-        viewDate.addSubview(labelTime)
-        labelDate.anchor(top: labelDate.bottomAnchor, left: viewDate.leftAnchor, paddingTop: 2)
-        
-        return viewDate
+    private let dateLabel:  UILabel = {
+        let label = UILabel()
+        label.text = "Web, December 9"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.tintColor = UIColor(named: Constant.textColor)
+        return label
+    }()
+
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "20:36"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.tintColor = UIColor(named: Constant.textColor)
+        return label
     }()
     
     private lazy var cityNameContainer: UIView = {
@@ -57,16 +54,18 @@ class WeatherController: UIViewController {
         cityNameView.addSubview(placeImage)
         placeImage.anchor(top: cityNameView.topAnchor, left: cityNameView.leftAnchor,
                           paddingTop: 15, paddingLeft: 15)
-        placeImage.dimensions(width: 18, height: 18)
+        placeImage.dimensions(width: 15, height: 15)
         
         cityNameView.addSubview(cityNameLabel)
         cityNameLabel.centerY(inView: placeImage)
         cityNameLabel.anchor(left: placeImage.rightAnchor, right: cityNameView.rightAnchor,
                          paddingLeft: 3, paddingRight: 15)
         
-        cityNameView.addSubview(dateAndTimeView)
-        dateAndTimeView.dimensions(width: 150, height: 25)
-        dateAndTimeView.anchor(top: cityNameLabel.bottomAnchor, left: cityNameLabel.leftAnchor, paddingTop: 3, paddingLeft: 15)
+        cityNameView.addSubview(dateLabel)
+        dateLabel.anchor(top: cityNameLabel.bottomAnchor, left: cityNameLabel.leftAnchor, paddingTop: 3)
+        
+        cityNameView.addSubview(timeLabel)
+        timeLabel.anchor(top: dateLabel.bottomAnchor, left: cityNameLabel.leftAnchor, paddingTop: 2)
         
         return cityNameView
     }()
@@ -86,7 +85,7 @@ class WeatherController: UIViewController {
         
         view.addSubview(cityNameContainer)
         cityNameContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 15, paddingLeft: 15, paddingRight: 15)
-        cityNameContainer.dimensions(height: 100)
+        cityNameContainer.dimensions(height: 79)
         
     }
     
@@ -95,9 +94,15 @@ class WeatherController: UIViewController {
         
         if let navigationBar = self.navigationController?.navigationBar {
             
-            let menuFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height, y: 20, width: navigationBar.frame.height - 16, height: navigationBar.frame.height - 16)
-            let plusFrame = CGRect(x: navigationBar.frame.width - (2 * navigationBar.frame.height) - 10, y: 20, width: navigationBar.frame.height - 16, height: navigationBar.frame.height - 16)
-            let backFrame = CGRect(x: 20, y: 20, width: navigationBar.frame.height - 16, height: navigationBar.frame.height - 16)
+            let menuFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.height,
+                                   y: 20, width: navigationBar.frame.height - 22,
+                                   height: navigationBar.frame.height - 22)
+            let plusFrame = CGRect(x: navigationBar.frame.width - (2 * navigationBar.frame.height) - 10,
+                                   y: 20, width: navigationBar.frame.height - 19,
+                                   height: navigationBar.frame.height - 19)
+            let backFrame = CGRect(x: 20,
+                                   y: 20, width: navigationBar.frame.height - 22,
+                                   height: navigationBar.frame.height - 22)
             
             let menuButton = UIButton.init(frame: menuFrame)
             menuButton.setImage(UIImage(named: Constant.menuIcon)?.withRenderingMode(.alwaysTemplate), for: .normal)

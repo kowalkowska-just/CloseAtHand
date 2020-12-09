@@ -107,9 +107,9 @@ class WeatherWidget: UIView {
     
     private let rainImage: UIImageView = {
         let image = UIImageView()
-     //   image.image = UIImage(systemName: "cloud.rain")
         image.image = UIImage.init(named: Constant.wetImage)
         image.tintColor = UIColor.init(named: Constant.textColor)
+        image.image = image.image?.withRenderingMode(.alwaysTemplate)
         image.contentMode = .scaleAspectFit
         
         return image
@@ -125,9 +125,9 @@ class WeatherWidget: UIView {
     
     private let windImage: UIImageView = {
         let image = UIImageView()
-    //    image.image = UIImage(systemName: "wind")
         image.image = UIImage.init(named: Constant.windImage)
         image.tintColor = UIColor.init(named: Constant.textColor)
+        image.image = image.image?.withRenderingMode(.alwaysTemplate)
         image.contentMode = .scaleAspectFit
 
         return image
