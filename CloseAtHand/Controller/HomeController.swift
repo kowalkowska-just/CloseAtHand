@@ -12,14 +12,12 @@ class HomeController: UIViewController {
 
     //MARK: - Properties
     
-    let weatherWidget = WeatherWidget()
-    let calendarWidget = CalendarWidget()
-    let toDoListWidget = ToDoListWidget()
-    let plannerWidget = PlannerWidget()
-    let placesWidget = PlacesWidget()
-    let notesWidget = NotesWidget()
-    
-    
+    private let weatherWidget = WeatherWidget()
+    private let calendarWidget = CalendarWidget()
+    private let toDoListWidget = ToDoListWidget()
+    private let plannerWidget = PlannerWidget()
+    private let placesWidget = PlacesWidget()
+    private let notesWidget = NotesWidget()
     
     //MARK: - Lifecycle
     
@@ -59,13 +57,13 @@ class HomeController: UIViewController {
     //MARK: - Helper functions
     
     func configureUI() {
+        configureNavBar()
+        
         let tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
         let statusBarHeight = navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
         let heightView = view.bounds.size.height - tabBarHeight - statusBarHeight - navigationBarHeight
-        
-        configureNavBar()
-        
+                
         view.backgroundColor = UIColor.init(named: Constant.backgroundColor)
 
         view.addSubview(weatherWidget)
