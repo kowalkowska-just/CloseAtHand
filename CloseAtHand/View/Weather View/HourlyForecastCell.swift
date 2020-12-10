@@ -1,5 +1,5 @@
 //
-//  HourlyForecastView.swift
+//  HourlyForecastCell.swift
 //  CloseAtHand
 //
 //  Created by Justyna Kowalkowska on 10/12/2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HourlyForecastView: UIView {
+class HourlyForecastCell: UITableViewCell {
 
     //MARK: - Properties
     
@@ -65,8 +65,10 @@ class HourlyForecastView: UIView {
     
     //MARK: - Lifecycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
         
         configureUI()
     }
@@ -80,23 +82,14 @@ class HourlyForecastView: UIView {
     private func configureUI() {
         backgroundColor = UIColor(named: Constant.secendaryBackgroundColor)
         
-        addSubview(timeLabel)
-        timeLabel.anchor(top: topAnchor, paddingTop: 5)
-        timeLabel.centerX(inView: self)
+        let stack = UIStackView(arrangedSubviews: [timeLabel, weatherImage, temperatureLabel, precipitationView])
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.spacing = 4
         
-        addSubview(weatherImage)
-        weatherImage.anchor(top: timeLabel.bottomAnchor, paddingTop: 4)
-        weatherImage.dimensions(width: 20, height: 20)
-        weatherImage.centerX(inView: timeLabel)
-        
-        addSubview(temperatureLabel)
-        temperatureLabel.anchor(top: weatherImage.bottomAnchor, paddingTop: 4)
-        temperatureLabel.centerX(inView: timeLabel)
-        
-        addSubview(precipitationView)
-        precipitationView.anchor(top: temperatureLabel.bottomAnchor, bottom: self.bottomAnchor)
-        precipitationView.centerX(inView: timeLabel)
-        precipitationView.dimensions(height: 10)
+        addSubview(stack)
+        stack.centerY(inView: self)
+        stack.centerX(inView: self)
     }
 
 }
