@@ -59,5 +59,14 @@ struct Constant {
     static let wetImage = "wet"
     static let windImage = "wind"
     static let placeIcon = "placeIcon"
+    static let minTemp = "min-temp-icon"
+    static let maxTemp = "max-temp-icon"
+    
+    //Weather icons
+    
+    static let clearSky = "clear-sky"
+    static let drizzle = "drizzle"
+    static let fewClouds = "few-clouds"
+    
 }
 

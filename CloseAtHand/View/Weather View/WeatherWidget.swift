@@ -76,7 +76,7 @@ class WeatherWidget: UIView {
     
     private var weatherImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "cloud.sun")
+        image.image = UIImage(named: Constant.fewClouds)
         image.tintColor = UIColor.init(named: Constant.textColor)
         image.contentMode = .scaleAspectFill
         

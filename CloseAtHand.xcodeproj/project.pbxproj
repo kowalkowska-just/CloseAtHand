@@ -37,6 +37,7 @@
 		D1D367542579724600C870E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367532579724600C870E0 /* User.swift */; };
 		D1D36759257976E900C870E0 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36758257976E900C870E0 /* Service.swift */; };
 		D1D36765257AF2BB00C870E0 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36764257AF2BB00C870E0 /* Constant.swift */; };
+		D1D3678C2582B40700C870E0 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D3678B2582B40700C870E0 /* HourlyForecastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		D1D367532579724600C870E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D1D36758257976E900C870E0 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D1D36764257AF2BB00C870E0 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		D1D3678B2582B40700C870E0 /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
 		DCAC1B660B55A39AAB4399E8 /* Pods-CloseAtHand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloseAtHand.release.xcconfig"; path = "Target Support Files/Pods-CloseAtHand/Pods-CloseAtHand.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				D10CE5DF2576C8390080AC40 /* WeatherWidget.swift */,
+				D1D3678B2582B40700C870E0 /* HourlyForecastView.swift */,
 			);
 			path = "Weather View";
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				D10CE63425786B3B0080AC40 /* CalendarWidget.swift in Sources */,
 				D16C083B256FE09F00D16F2C /* SceneDelegate.swift in Sources */,
 				D1D36765257AF2BB00C870E0 /* Constant.swift in Sources */,
+				D1D3678C2582B40700C870E0 /* HourlyForecastView.swift in Sources */,
 				D16C0880256FE3B500D16F2C /* SignUpController.swift in Sources */,
 				D10CE603257708870080AC40 /* NotesController.swift in Sources */,
 			);

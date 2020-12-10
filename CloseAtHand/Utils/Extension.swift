@@ -252,7 +252,8 @@ extension UITextField {
     func textField(withPlaceholder placeholder: String, isSecureTextEntry: Bool) -> UITextField{
         let tf = UITextField()
         tf.borderStyle = .none
-        tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor(white: 1.0, alpha: 0.5)])
+        tf.attributedPlaceholder = NSAttributedString(string: placeholder,
+                                                      attributes: [NSAttributedString.Key.foregroundColor : UIColor(white: 1.0, alpha: 0.5)])
         tf.textColor = .white
         tf.font = UIFont.systemFont(ofSize: 14)
         tf.isSecureTextEntry = isSecureTextEntry

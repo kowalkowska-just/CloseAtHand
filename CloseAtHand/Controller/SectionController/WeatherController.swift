@@ -11,7 +11,7 @@ class WeatherController: UIViewController {
     
 //MARK: - Properties
     
-    private let placeImage: UIImageView = {
+    private let placeIcon: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Constant.placeIcon)
         image.tintColor = UIColor(named: Constant.textColor)
@@ -21,7 +21,7 @@ class WeatherController: UIViewController {
         return image
     }()
     
-    private let cityNameLabel: UILabel = {
+    private let locationLabel: UILabel = {
         let label = UILabel()
         label.text = "Gdansk"
         label.font = UIFont.systemFont(ofSize: 20)
@@ -31,8 +31,9 @@ class WeatherController: UIViewController {
         
     private let dateLabel:  UILabel = {
         let label = UILabel()
-        label.text = "Web, December 9"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.text = "Thursday, December 10"
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textAlignment = .right
         label.tintColor = UIColor(named: Constant.textColor)
         return label
     }()
@@ -40,35 +41,151 @@ class WeatherController: UIViewController {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.text = "20:36"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 11)
         label.tintColor = UIColor(named: Constant.textColor)
         return label
     }()
     
-    private lazy var cityNameContainer: UIView = {
-        let cityNameView = UIView()
-        cityNameView.layer.cornerRadius = 5
-        cityNameView.backgroundColor = UIColor(named: Constant.secendaryBackgroundColor)
-        cityNameView.addShadow()
+    private lazy var locationContainer: UIView = {
+        let locationView = UIView()
+        locationView.layer.cornerRadius = 5
+        locationView.backgroundColor = UIColor(named: Constant.secendaryBackgroundColor)
+        locationView.addShadow()
         
-        cityNameView.addSubview(placeImage)
-        placeImage.anchor(top: cityNameView.topAnchor, left: cityNameView.leftAnchor,
-                          paddingTop: 15, paddingLeft: 15)
-        placeImage.dimensions(width: 15, height: 15)
+        locationView.addSubview(dateLabel)
+        dateLabel.anchor(top: locationView.topAnchor, right: locationView.rightAnchor,
+                         paddingTop: 15, paddingRight: 15)
+        dateLabel.dimensions(width: 150)
         
-        cityNameView.addSubview(cityNameLabel)
-        cityNameLabel.centerY(inView: placeImage)
-        cityNameLabel.anchor(left: placeImage.rightAnchor, right: cityNameView.rightAnchor,
-                         paddingLeft: 3, paddingRight: 15)
+        locationView.addSubview(timeLabel)
+        timeLabel.anchor(top: dateLabel.bottomAnchor, bottom: locationView.bottomAnchor, right: locationView.rightAnchor,
+                         paddingTop: 1, paddingBottom: 15, paddingRight: 15)
         
-        cityNameView.addSubview(dateLabel)
-        dateLabel.anchor(top: cityNameLabel.bottomAnchor, left: cityNameLabel.leftAnchor, paddingTop: 3)
+        locationView.addSubview(placeIcon)
+        placeIcon.centerY(inView: locationView)
+        placeIcon.anchor(left: locationView.leftAnchor, paddingLeft: 15)
+        placeIcon.dimensions(width: 15, height: 15)
         
-        cityNameView.addSubview(timeLabel)
-        timeLabel.anchor(top: dateLabel.bottomAnchor, left: cityNameLabel.leftAnchor, paddingTop: 2)
+        locationView.addSubview(locationLabel)
+        locationLabel.centerY(inView: locationView)
+        locationLabel.anchor(left: placeIcon.rightAnchor, right: dateLabel.leftAnchor,
+                             paddingLeft: 5, paddingRight: 3)
         
-        return cityNameView
+        return locationView
     }()
+    
+    private var temperatureLabel: UILabel = {
+        let label = UILabel()
+        label.text = "19°"
+        label.textColor = UIColor.init(named: Constant.textColor)
+        label.font = UIFont.systemFont(ofSize: 35)
+
+        return label
+    }()
+    
+    private var weatherImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: Constant.fewClouds)
+        image.tintColor = UIColor.init(named: Constant.textColor)
+        image.contentMode = .scaleAspectFill
+        
+        return image
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Few clouds"
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.tintColor = UIColor(named: Constant.textColor)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byClipping
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        
+        return label
+    }()
+    
+    private let minTemp: UILabel = {
+        let label = UILabel()
+        label.text = "22°"
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.tintColor = UIColor(named: Constant.textColor)
+        return label
+    }()
+    
+    private let maxTemp: UILabel = {
+        let label = UILabel()
+        label.text = "23°"
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.tintColor = UIColor(named: Constant.textColor)
+        return label
+    }()
+    
+    private var feelsTemp = 23
+    
+    private lazy var feelsTempLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Feels like \(feelsTemp)°"
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.tintColor = UIColor(named: Constant.textColor)
+        return label
+    }()
+    
+    private lazy var temperatureContainer: UIView = {
+        let temperatureView = UIView()
+        temperatureView.layer.cornerRadius = 5
+        temperatureView.backgroundColor = UIColor(named: Constant.secendaryBackgroundColor)
+        temperatureView.addShadow()
+        
+        temperatureView.addSubview(weatherImage)
+        weatherImage.anchor(top: temperatureView.topAnchor, left: temperatureView.leftAnchor, bottom: temperatureView.bottomAnchor,
+                            paddingTop: 15, paddingLeft: 15, paddingBottom: 15)
+        
+        temperatureView.addSubview(temperatureLabel)
+        temperatureLabel.centerY(inView: weatherImage)
+        temperatureLabel.anchor(left: weatherImage.rightAnchor, paddingLeft: 5)
+        
+        temperatureView.addSubview(descriptionLabel)
+        descriptionLabel.anchor(top: temperatureView.topAnchor, right: temperatureView.rightAnchor,
+                                paddingTop: 10, paddingRight: 15)
+        
+        temperatureView.addSubview(feelsTempLabel)
+        feelsTempLabel.anchor(top: descriptionLabel.bottomAnchor, right: temperatureView.rightAnchor,
+                              paddingTop: 5, paddingRight: 15)
+        
+        temperatureView.addSubview(minTemp)
+        minTemp.anchor(top: feelsTempLabel.bottomAnchor, bottom: temperatureView.bottomAnchor, right: temperatureView.rightAnchor,
+                       paddingTop: 5, paddingBottom: 15, paddingRight: 15)
+        
+        let imageMinTemp = UIImageView()
+        imageMinTemp.image = UIImage(named: Constant.minTemp)
+        imageMinTemp.image = imageMinTemp.image?.withRenderingMode(.alwaysTemplate)
+        imageMinTemp.tintColor = UIColor.init(named: Constant.textColor)
+        imageMinTemp.contentMode = .scaleAspectFill
+        imageMinTemp.dimensions(width: 10, height: 10)
+        
+        temperatureView.addSubview(imageMinTemp)
+        imageMinTemp.centerY(inView: minTemp)
+        imageMinTemp.anchor(right: minTemp.leftAnchor, paddingRight: 2)
+        
+        temperatureView.addSubview(maxTemp)
+        maxTemp.anchor(right: imageMinTemp.leftAnchor, paddingRight: 5)
+        maxTemp.centerY(inView: minTemp)
+        
+        let imageMaxTemp = UIImageView()
+        imageMaxTemp.image = UIImage(named: Constant.maxTemp)
+        imageMaxTemp.image = imageMaxTemp.image?.withRenderingMode(.alwaysTemplate)
+        imageMaxTemp.tintColor = UIColor.init(named: Constant.textColor)
+        imageMaxTemp.contentMode = .scaleAspectFill
+        imageMaxTemp.dimensions(width: 10, height: 10)
+        
+        temperatureView.addSubview(imageMaxTemp)
+        imageMaxTemp.centerY(inView: minTemp)
+        imageMaxTemp.anchor(right: maxTemp.leftAnchor, paddingRight: 2)
+        
+        return temperatureView
+    }()
+    
     
 //MARK: - Lifecycle
 
@@ -83,10 +200,13 @@ class WeatherController: UIViewController {
         configureNavBar()
         view.backgroundColor = UIColor.init(named: Constant.backgroundColor)
         
-        view.addSubview(cityNameContainer)
-        cityNameContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 15, paddingLeft: 15, paddingRight: 15)
-        cityNameContainer.dimensions(height: 79)
+        view.addSubview(locationContainer)
+        locationContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                                 paddingTop: 15, paddingLeft: 15, paddingRight: 15)
         
+        view.addSubview(temperatureContainer)
+        temperatureContainer.anchor(top: locationContainer.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                                    paddingTop: 5, paddingLeft: 15, paddingRight: 15)
     }
     
     private func configureNavBar() {
