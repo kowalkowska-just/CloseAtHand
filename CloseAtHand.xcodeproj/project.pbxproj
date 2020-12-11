@@ -41,6 +41,10 @@
 		D1D367942582C9C500C870E0 /* WeekForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367932582C9C500C870E0 /* WeekForecastCell.swift */; };
 		D1D367992582CEB200C870E0 /* CurrentTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367982582CEB200C870E0 /* CurrentTemperatureView.swift */; };
 		D1D3679E2582D0E800C870E0 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D3679D2582D0E800C870E0 /* CurrentLocationView.swift */; };
+		D1D367A92582FA1900C870E0 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367A82582FA1900C870E0 /* CurrentWeatherModel.swift */; };
+		D1D367AE25839D6400C870E0 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367AD25839D6400C870E0 /* LocationHandler.swift */; };
+		D1D367B62583A21200C870E0 /* HourlyForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367B52583A21200C870E0 /* HourlyForecastModel.swift */; };
+		D1D367BB2583A24100C870E0 /* WeekForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367BA2583A24100C870E0 /* WeekForecastModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +106,10 @@
 		D1D367932582C9C500C870E0 /* WeekForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastCell.swift; sourceTree = "<group>"; };
 		D1D367982582CEB200C870E0 /* CurrentTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTemperatureView.swift; sourceTree = "<group>"; };
 		D1D3679D2582D0E800C870E0 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
+		D1D367A82582FA1900C870E0 /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
+		D1D367AD25839D6400C870E0 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		D1D367B52583A21200C870E0 /* HourlyForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastModel.swift; sourceTree = "<group>"; };
+		D1D367BA2583A24100C870E0 /* WeekForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastModel.swift; sourceTree = "<group>"; };
 		DCAC1B660B55A39AAB4399E8 /* Pods-CloseAtHand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloseAtHand.release.xcconfig"; path = "Target Support Files/Pods-CloseAtHand/Pods-CloseAtHand.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -318,6 +326,7 @@
 			children = (
 				D16C0884256FE3D600D16F2C /* Extension.swift */,
 				D1D36764257AF2BB00C870E0 /* Constant.swift */,
+				D1D367AD25839D6400C870E0 /* LocationHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -326,6 +335,9 @@
 			isa = PBXGroup;
 			children = (
 				D1D367532579724600C870E0 /* User.swift */,
+				D1D367A82582FA1900C870E0 /* CurrentWeatherModel.swift */,
+				D1D367B52583A21200C870E0 /* HourlyForecastModel.swift */,
+				D1D367BA2583A24100C870E0 /* WeekForecastModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -550,12 +562,16 @@
 				D16C0839256FE09F00D16F2C /* AppDelegate.swift in Sources */,
 				D10CE61C25786A330080AC40 /* ToDoListWidget.swift in Sources */,
 				D10CE5FE257708400080AC40 /* PlacesController.swift in Sources */,
+				D1D367AE25839D6400C870E0 /* LocationHandler.swift in Sources */,
 				D10CE63425786B3B0080AC40 /* CalendarWidget.swift in Sources */,
 				D1D367992582CEB200C870E0 /* CurrentTemperatureView.swift in Sources */,
+				D1D367B62583A21200C870E0 /* HourlyForecastModel.swift in Sources */,
 				D16C083B256FE09F00D16F2C /* SceneDelegate.swift in Sources */,
+				D1D367A92582FA1900C870E0 /* CurrentWeatherModel.swift in Sources */,
 				D1D36765257AF2BB00C870E0 /* Constant.swift in Sources */,
 				D1D3678C2582B40700C870E0 /* HourlyForecastCell.swift in Sources */,
 				D16C0880256FE3B500D16F2C /* SignUpController.swift in Sources */,
+				D1D367BB2583A24100C870E0 /* WeekForecastModel.swift in Sources */,
 				D10CE603257708870080AC40 /* NotesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

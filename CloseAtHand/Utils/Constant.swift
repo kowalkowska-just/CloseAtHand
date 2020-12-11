@@ -68,5 +68,10 @@ struct Constant {
     static let drizzle = "drizzle"
     static let fewClouds = "few-clouds"
     
+    
+    //Identifiers
+    
+    static let hourlyForecastCell = "HourlyForecastCell"
+    static let weekForecastCell = "WeekForecastCell"
 }
 
