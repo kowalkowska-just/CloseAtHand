@@ -8,6 +8,15 @@
 import Foundation
 
 
-struct HourlyForecastModel {
-    
+struct HourlyForecastModel: Codable {
+    let dt: Int //UTC
+    let temp: Double //C
+    let pop: Double
+    let weather: [HourlyForecastWeather]
+}
+
+struct HourlyForecastWeather: Codable {
+    let id: Int
+    let description: String
+    let icon: String
 }

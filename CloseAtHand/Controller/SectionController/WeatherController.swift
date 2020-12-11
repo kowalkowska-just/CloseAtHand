@@ -19,9 +19,10 @@ class WeatherController: UIViewController {
     
     private let locationManager = LocationHandler.shared.locationManager
     
+    private let weatherModels = [WeatherModel]()
     private var currentWeatherModels = [CurrentWeatherModel]()
     private var hourlyForecastModels = [HourlyForecastModel]()
-    private var weekForecastModels = [WeekForecastModel]()
+    private var dailyForecastModels = [DailyForecastModel]()
     
 //MARK: - Lifecycle
 
@@ -123,7 +124,7 @@ extension WeatherController: UITableViewDelegate, UITableViewDataSource {
         case hourlyForecasteTableView:
             return hourlyForecastModels.count
         case weekForecasteTableView:
-            return weekForecastModels.count
+            return dailyForecastModels.count
         default:
             return 0
         }

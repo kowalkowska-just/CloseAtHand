@@ -7,11 +7,16 @@
 
 import CoreLocation
 
+protocol LocationHandlerDelegate {
+    func requestWeatherForLocation(location: CLLocation)
+}
+
 class LocationHandler: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationHandler()
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
+    var delegate : LocationHandlerDelegate?
     
     override init() {
         super.init()
@@ -30,16 +35,15 @@ class LocationHandler: NSObject, CLLocationManagerDelegate {
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
             locationManager.stopUpdatingLocation()
-            requestWeatherForLocation()
+            requestLocation()
         }
     }
     
-    func requestWeatherForLocation() {
+    func requestLocation() {
         guard let currentLocation = currentLocation else { return }
-        let long = currentLocation.coordinate.longitude
-        let lat = currentLocation.coordinate.latitude
         
-        print("DEBUG: Long: \(long) | lat: \(lat)")
+        print("DEBUG: Current location is \(currentLocation)")
+        delegate?.requestWeatherForLocation(location: currentLocation)
     }
 
 }
