@@ -99,5 +99,9 @@
 	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>&quot;Please allow location to see local weather.&quot;</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>&quot;Please allow location to see local weather.&quot;</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>&quot;Please allow location to see local weather.&quot;</string>
 </dict>
 </plist>

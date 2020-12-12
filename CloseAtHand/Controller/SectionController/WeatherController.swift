@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class WeatherController: UIViewController {
@@ -19,10 +20,10 @@ class WeatherController: UIViewController {
     
     private let locationManager = LocationHandler.shared.locationManager
     
-    private let weatherModels = [WeatherModel]()
-    private var currentWeatherModels = [CurrentWeatherModel]()
-    private var hourlyForecastModels = [HourlyForecastModel]()
-    private var dailyForecastModels = [DailyForecastModel]()
+    private let weatherModels = [WeatherData]()
+    private var currentWeatherModels = [CurrentWeatherData]()
+    private var hourlyForecastModels = [HourlyForecastData]()
+    private var dailyForecastModels = [DailyForecastData]()
     
 //MARK: - Lifecycle
 
@@ -36,7 +37,7 @@ class WeatherController: UIViewController {
     
     private func configureUI() {
         configureNavBar()
-        configureTableView()
+       // configureTableView()
         view.backgroundColor = UIColor.init(named: Constant.backgroundColor)
         
         view.addSubview(locationContainerView)
@@ -47,13 +48,13 @@ class WeatherController: UIViewController {
         temperatureContainerView.anchor(top: locationContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
                                     paddingTop: 5, paddingLeft: 15, paddingRight: 15)
         
-        view.addSubview(hourlyForecasteTableView)
-        hourlyForecasteTableView.layer.cornerRadius = 5
-        hourlyForecasteTableView.anchor(top: temperatureContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingRight: 15)
-        
-        view.addSubview(weekForecasteTableView)
-        weekForecasteTableView.layer.cornerRadius = 5
-        weekForecasteTableView.anchor(top: hourlyForecasteTableView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingRight: 15)
+//        view.addSubview(hourlyForecasteTableView)
+//        hourlyForecasteTableView.layer.cornerRadius = 5
+//        hourlyForecasteTableView.anchor(top: temperatureContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingRight: 15)
+//        
+//        view.addSubview(weekForecasteTableView)
+//        weekForecasteTableView.layer.cornerRadius = 5
+//        weekForecasteTableView.anchor(top: hourlyForecasteTableView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingRight: 15)
     }
     
     func configureTableView() {
@@ -147,4 +148,3 @@ extension WeatherController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-

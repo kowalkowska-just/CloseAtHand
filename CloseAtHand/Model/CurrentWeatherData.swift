@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CurrentWeatherModel: Codable {
+struct CurrentWeatherData: Codable {
     let dt: Int //UTC
     let sunrise: Int //UTC
     let sunset: Int //UTC

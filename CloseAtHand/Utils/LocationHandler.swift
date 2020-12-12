@@ -7,43 +7,43 @@
 
 import CoreLocation
 
-protocol LocationHandlerDelegate {
-    func requestWeatherForLocation(location: CLLocation)
-}
-
 class LocationHandler: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationHandler()
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
-    var delegate : LocationHandlerDelegate?
     
     override init() {
         super.init()
-        
+    
+        setupLocationManager()
+    }
+    
+    func setupLocationManager() {
         locationManager = CLLocationManager()
-        setupLocation()
-    }
-    
-    func setupLocation() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if !locations.isEmpty, currentLocation == nil {
-            currentLocation = locations.first
-            locationManager.stopUpdatingLocation()
-            requestLocation()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        } else {
+            print("DEBUG: Failed - Location service disabled.")
         }
     }
     
-    func requestLocation() {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last
+        locationManager.stopUpdatingLocation()
+        requestWeatherForLocation()
+    }
+    
+    func requestWeatherForLocation() {
         guard let currentLocation = currentLocation else { return }
+        let lat = currentLocation.coordinate.latitude
+        let long = currentLocation.coordinate.longitude
         
-        print("DEBUG: Current location is \(currentLocation)")
-        delegate?.requestWeatherForLocation(location: currentLocation)
+        WeatherManager.shered.fetchWeather(longitude: long, latitude: lat)
     }
 
 }

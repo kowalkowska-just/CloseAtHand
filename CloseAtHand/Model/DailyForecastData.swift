@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct DailyForecastModel: Codable {
+struct DailyForecastData: Codable {
     let dt: Int //UTC
     let temp: Temperature //C
     let pop: Double
