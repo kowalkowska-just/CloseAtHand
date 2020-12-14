@@ -17,9 +17,6 @@ class WeatherController: UIViewController {
     private var weekForecasteTableView: UITableView!
     private let locationContainerView = CurrentLocationView()
     private let temperatureContainerView = CurrentTemperatureView()
-    
-    private let locationManager = LocationHandler.shared.locationManager
-    
     private let weatherModels = [WeatherData]()
     private var currentWeatherModels = [CurrentWeatherData]()
     private var hourlyForecastModels = [HourlyForecastData]()
@@ -129,7 +126,6 @@ extension WeatherController: UITableViewDelegate, UITableViewDataSource {
         default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

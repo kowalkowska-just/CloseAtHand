@@ -8,12 +8,13 @@
 import Foundation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didUpdateWeather(weather: WeatherModel)
+    func didFailWithError(error: Error)
 }
 
 struct WeatherManager {
     
-    static let shered = WeatherManager()
+   // static let shered = WeatherManager()
     var delegate: WeatherManagerDelegate?
     
     func fetchWeather(longitude: Double, latitude: Double) {
@@ -27,25 +28,33 @@ struct WeatherManager {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                
-                guard let weatherData = data, error == nil else {
-                    print("DEBUG: Failed perform request with error: \(error)")
+                if error != nil {
+                    self.delegate?.didFailWithError(error: error!)
                     return
                 }
-                if let weather = self.parseJSON(weatherData) {
-                    self.delegate?.didUpdateWeather(self, weather: weather)
+                if let weatherData = data {
+                    if let weatherModel = parseJSON(weatherData) {
+                        print("DEBUG: Weather model: \(weatherModel)")
+                        
+                        self.delegate?.didUpdateWeather(weather: weatherModel)
+                    }
                 }
-            }.resume()
+            }
+            task.resume()
         }
     }
     
     func parseJSON(_ weatherData: Data) ->  WeatherModel? {
+        var json: WeatherData?
         let decoder = JSONDecoder()
         do {
-            let json = try decoder.decode(WeatherData.self, from: weatherData)
-            let latitude = json.lat
-            let longitude = json.lon
-            let currentWeather = json.current
+            json = try decoder.decode(WeatherData.self, from: weatherData)
+            
+            guard let result = json else { return nil }
+            
+            let latitude = result.lat
+            let longitude = result.lon
+            let currentWeather = result.current
             let date = currentWeather.dt
             let sunrise = currentWeather.sunrise
             let sunset = currentWeather.sunset
@@ -62,10 +71,10 @@ struct WeatherManager {
             let weatherIcon = currentWeather.weather[0].icon
             
             let weather = WeatherModel(latitude: latitude, longitude: longitude, date: date, sunrise: sunrise, sunset: sunset, temperature: temperature, feelsLikeTemperature: feelsLikeTemperature, pressure: pressure, humidity: humidity, uvi: uvi, clouds: clouds, visibility: visibility, windSpeed: windSpeed, weatherId: weatherId, weatherDescription: weatherDescription, weatherIcon: weatherIcon)
-            
+                        
             return weather
         } catch {
-            print("DEBUG: Failed parse JSON with error: \(error)")
+            delegate?.didFailWithError(error: error)
             return nil
         }
     }

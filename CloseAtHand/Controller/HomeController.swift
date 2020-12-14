@@ -7,24 +7,35 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class HomeController: UIViewController {
 
     //MARK: - Properties
     
-    private let weatherWidget = WeatherWidget()
+    private var weatherWidget = WeatherWidget()
+    
     private let calendarWidget = CalendarWidget()
     private let toDoListWidget = ToDoListWidget()
     private let plannerWidget = PlannerWidget()
     private let placesWidget = PlacesWidget()
     private let notesWidget = NotesWidget()
     
+    private let locationManager = CLLocationManager()
+    var weatherManager = WeatherManager()
+
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        signOut()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        weatherWidget.delegate = self
+        weatherManager.delegate = self
+        //        signOut()
         configureUI()
         checkIfUserIsLoggedIn()
     }
@@ -42,6 +53,7 @@ class HomeController: UIViewController {
             }
         } else {
             print("DEBUG: User is logged in..")
+            
         }
     }
     
@@ -72,7 +84,6 @@ class HomeController: UIViewController {
         weatherWidget.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                              paddingTop: 15, paddingLeft: 15)
         weatherWidget.layer.cornerRadius = 4.5
-        weatherWidget.delegate = self
         
         view.addSubview(calendarWidget)
         calendarWidget.dimensions(width: (view.bounds.size.width - 45) / 2,
@@ -142,4 +153,37 @@ extension HomeController: WeatherWidgetDelegate {
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
         }
+}
+
+//MARK: - Weather Manager Delegate
+
+extension HomeController: WeatherManagerDelegate {
+    func didFailWithError(error: Error) {
+        print("Failed parse JSON with error: \(error)")
     }
+    
+    func didUpdateWeather(weather: WeatherModel) {
+        DispatchQueue.main.async {
+            
+            self.weatherWidget.temperatureLabel.text = String(weather.temperature)
+        }
+    }
+}
+
+//MARK: - CCLocationManagerDelegatec
+
+extension HomeController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            weatherManager.fetchWeather(longitude: lon, latitude: lat)
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("DEBUG: Failed update location with error: \(error)")
+    }
+}

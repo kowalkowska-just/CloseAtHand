@@ -46,7 +46,6 @@
 		D1D367992582CEB200C870E0 /* CurrentTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367982582CEB200C870E0 /* CurrentTemperatureView.swift */; };
 		D1D3679E2582D0E800C870E0 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D3679D2582D0E800C870E0 /* CurrentLocationView.swift */; };
 		D1D367A92582FA1900C870E0 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367A82582FA1900C870E0 /* WeatherData.swift */; };
-		D1D367AE25839D6400C870E0 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367AD25839D6400C870E0 /* LocationHandler.swift */; };
 		D1D367B62583A21200C870E0 /* HourlyForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367B52583A21200C870E0 /* HourlyForecastData.swift */; };
 		D1D367BB2583A24100C870E0 /* DailyForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D367BA2583A24100C870E0 /* DailyForecastData.swift */; };
 /* End PBXBuildFile section */
@@ -115,7 +114,6 @@
 		D1D367982582CEB200C870E0 /* CurrentTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTemperatureView.swift; sourceTree = "<group>"; };
 		D1D3679D2582D0E800C870E0 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		D1D367A82582FA1900C870E0 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
-		D1D367AD25839D6400C870E0 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		D1D367B52583A21200C870E0 /* HourlyForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastData.swift; sourceTree = "<group>"; };
 		D1D367BA2583A24100C870E0 /* DailyForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastData.swift; sourceTree = "<group>"; };
 		DCAC1B660B55A39AAB4399E8 /* Pods-CloseAtHand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloseAtHand.release.xcconfig"; path = "Target Support Files/Pods-CloseAtHand/Pods-CloseAtHand.release.xcconfig"; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 			children = (
 				D16C0884256FE3D600D16F2C /* Extension.swift */,
 				D1D36764257AF2BB00C870E0 /* Constant.swift */,
-				D1D367AD25839D6400C870E0 /* LocationHandler.swift */,
 				D16DC39E2583F489002D76FC /* Key.swift */,
 			);
 			path = Utils;
@@ -578,7 +575,6 @@
 				D16C0839256FE09F00D16F2C /* AppDelegate.swift in Sources */,
 				D10CE61C25786A330080AC40 /* ToDoListWidget.swift in Sources */,
 				D10CE5FE257708400080AC40 /* PlacesController.swift in Sources */,
-				D1D367AE25839D6400C870E0 /* LocationHandler.swift in Sources */,
 				D10CE63425786B3B0080AC40 /* CalendarWidget.swift in Sources */,
 				D1D367992582CEB200C870E0 /* CurrentTemperatureView.swift in Sources */,
 				D1D367B62583A21200C870E0 /* HourlyForecastData.swift in Sources */,

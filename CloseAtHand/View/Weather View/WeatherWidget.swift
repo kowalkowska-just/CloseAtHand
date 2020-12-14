@@ -22,9 +22,9 @@ class WeatherWidget: UIView {
         return view
     }()
     
-    private let cityLabel: UILabel = {
+    var cityLabel: UILabel = {
         let label = UILabel()
-        label.text = "Gdańsk"
+   //     label.text = "Gdańsk"
         label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .left
@@ -32,9 +32,9 @@ class WeatherWidget: UIView {
         return label
     }()
     
-    private let cantryLabel: UILabel = {
+    var countryLabel: UILabel = {
         let label = UILabel()
-        label.text = "POLAND"
+  //      label.text = "POLAND"
         label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
@@ -46,8 +46,8 @@ class WeatherWidget: UIView {
         let view = UIView()
         view.addSubview(cityLabel)
         cityLabel.anchor(top: view.topAnchor, left: view.leftAnchor)
-        view.addSubview(cantryLabel)
-        cantryLabel.anchor(top: cityLabel.bottomAnchor, left: view.leftAnchor, paddingTop: 1)
+        view.addSubview(countryLabel)
+        countryLabel.anchor(top: cityLabel.bottomAnchor, left: view.leftAnchor, paddingTop: 1)
         
         return view
     }()
@@ -61,9 +61,9 @@ class WeatherWidget: UIView {
         return button
     }()
     
-    private var temperatureLabel: UILabel = {
+    var temperatureLabel: UILabel = {
         let label = UILabel()
-        label.text = "19°"
+//label.text = "19°"
         label.textColor = UIColor.init(named: Constant.textColor)
         label.numberOfLines = 0
         label.lineBreakMode = .byClipping
@@ -161,7 +161,6 @@ class WeatherWidget: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configureUI()
     }
     
@@ -226,7 +225,6 @@ class WeatherWidget: UIView {
     // MARK: - Selectors
 
     @objc func handleShowWeatherController() {
-        
         delegate?.showWeatherController()
     }
 }
