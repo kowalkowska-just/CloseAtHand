@@ -33,6 +33,7 @@ class HomeController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        
         weatherWidget.delegate = self
         weatherManager.delegate = self
         //        signOut()
@@ -136,6 +137,37 @@ class HomeController: UIViewController {
         }
     }
     
+    enum AddressName: Int {
+        case country
+        case city
+    }
+    
+    func getAddressFromLatLong(lat: Double, long: Double, completion: @escaping(String, String) -> Void ) {
+        
+        var center = CLLocationCoordinate2D()
+        center.latitude = lat
+        center.longitude = long
+        
+        let geoCoder = CLGeocoder()
+        
+        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        
+        geoCoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if error != nil {
+                print("DEBUG: Failed get address from lat and long with error:\(String(describing: error))")
+            }
+            
+            guard let placemark = placemarks?.first else { return }
+            guard let country = placemark.country else { return }
+            guard let city = placemark.locality else { return }
+            
+            let countryName = country
+            let cityName = city
+            
+            completion(cityName, countryName)
+        }
+    }
+    
     //MARK: - Selectors
 
     @objc func handlePersonController() {
@@ -164,6 +196,13 @@ extension HomeController: WeatherManagerDelegate {
     
     func didUpdateWeather(weather: WeatherModel) {
         DispatchQueue.main.async {
+            let lat = weather.latitude
+            let lon = weather.longitude
+            
+            self.getAddressFromLatLong(lat: lat, long: lon) { (city, country) in
+                self.weatherWidget.cityLabel.text = city
+                self.weatherWidget.countryLabel.text = country
+            }
             
             self.weatherWidget.temperatureLabel.text = String(weather.temperature)
         }

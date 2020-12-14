@@ -34,8 +34,6 @@ struct WeatherManager {
                 }
                 if let weatherData = data {
                     if let weatherModel = parseJSON(weatherData) {
-                        print("DEBUG: Weather model: \(weatherModel)")
-                        
                         self.delegate?.didUpdateWeather(weather: weatherModel)
                     }
                 }
