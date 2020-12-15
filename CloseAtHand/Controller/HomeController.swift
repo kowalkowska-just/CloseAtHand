@@ -197,9 +197,9 @@ extension HomeController: WeatherManagerDelegate {
     func didUpdateWeather(weather: WeatherModel) {
         DispatchQueue.main.async {
             let lat = weather.latitude
-            let lon = weather.longitude
+            let long = weather.longitude
             
-            self.getAddressFromLatLong(lat: lat, long: lon) { (city, country) in
+            self.getAddressFromLatLong(lat: lat, long: long) { (city, country) in
                 self.weatherWidget.cityLabel.text = city
                 self.weatherWidget.countryLabel.text = country
             }

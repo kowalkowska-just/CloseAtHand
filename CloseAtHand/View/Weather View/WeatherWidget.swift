@@ -26,6 +26,10 @@ class WeatherWidget: UIView {
         let label = UILabel()
    //     label.text = "Gdańsk"
         label.textColor = UIColor.init(named: Constant.textColor)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byClipping
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .left
         
@@ -34,7 +38,6 @@ class WeatherWidget: UIView {
     
     var countryLabel: UILabel = {
         let label = UILabel()
-  //      label.text = "POLAND"
         label.textColor = UIColor.init(named: Constant.textColor)
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
@@ -45,7 +48,7 @@ class WeatherWidget: UIView {
     private lazy var locationContainerView: UIView = {
         let view = UIView()
         view.addSubview(cityLabel)
-        cityLabel.anchor(top: view.topAnchor, left: view.leftAnchor)
+        cityLabel.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
         view.addSubview(countryLabel)
         countryLabel.anchor(top: cityLabel.bottomAnchor, left: view.leftAnchor, paddingTop: 1)
         
@@ -63,13 +66,13 @@ class WeatherWidget: UIView {
     
     var temperatureLabel: UILabel = {
         let label = UILabel()
-//label.text = "19°"
         label.textColor = UIColor.init(named: Constant.textColor)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.lineBreakMode = .byClipping
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
-        label.font = UIFont.systemFont(ofSize: 120)
+        label.font = UIFont.systemFont(ofSize: 80)
+        label.textAlignment = .center
 
         return label
     }()
@@ -89,10 +92,14 @@ class WeatherWidget: UIView {
         let imageView = UIView()
         
         tempView.addSubview(temperatureLabel)
-        temperatureLabel.anchor(top: tempView.topAnchor, left: tempView.leftAnchor, bottom: tempView.bottomAnchor, right: tempView.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        temperatureLabel.anchor(top: tempView.topAnchor, left: tempView.leftAnchor,
+                                bottom: tempView.bottomAnchor, right: tempView.rightAnchor,
+                                paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
         
         imageView.addSubview(weatherImage)
-        weatherImage.anchor(top: imageView.topAnchor, left: imageView.leftAnchor, bottom: imageView.bottomAnchor, right: imageView.rightAnchor, paddingTop: 15, paddingLeft: 5, paddingBottom: 15, paddingRight: 15)
+        weatherImage.anchor(top: imageView.topAnchor, left: imageView.leftAnchor,
+                            bottom: imageView.bottomAnchor, right: imageView.rightAnchor,
+                            paddingTop: 15, paddingLeft: 5, paddingBottom: 15, paddingRight: 15)
 
         let stack = UIStackView(arrangedSubviews: [tempView, imageView])
         stack.spacing = 5
@@ -182,7 +189,7 @@ class WeatherWidget: UIView {
         locationContainerView.dimensions(height: 40)
         
         addSubview(weatherButton)
-        weatherButton.dimensions(width: 45)
+        weatherButton.dimensions(width: 20)
         weatherButton.anchor(left: locationContainerView.rightAnchor, right: rightAnchor, paddingLeft: 10, paddingRight: 10)
         weatherButton.centerY(inView: locationContainerView)
         
