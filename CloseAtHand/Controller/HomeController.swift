@@ -204,7 +204,11 @@ extension HomeController: WeatherManagerDelegate {
                 self.weatherWidget.countryLabel.text = country
             }
             
-            self.weatherWidget.temperatureLabel.text = String(weather.temperature)
+            self.weatherWidget.temperatureLabel.text = weather.temperatureString
+            self.weatherWidget.windSpeedLabel.text = weather.windSpeedString
+            self.weatherWidget.weatherImage.image = UIImage(named: weather.conditionImage)
+
+            print(weather)
         }
     }
 }

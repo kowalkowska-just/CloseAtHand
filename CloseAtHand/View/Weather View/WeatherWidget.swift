@@ -39,6 +39,10 @@ class WeatherWidget: UIView {
     var countryLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(named: Constant.textColor)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byClipping
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
         
@@ -67,7 +71,7 @@ class WeatherWidget: UIView {
     var temperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(named: Constant.textColor)
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.lineBreakMode = .byClipping
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
@@ -77,9 +81,8 @@ class WeatherWidget: UIView {
         return label
     }()
     
-    private var weatherImage: UIImageView = {
+    var weatherImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: Constant.clearSky)
         image.tintColor = UIColor.init(named: Constant.textColor)
         image.contentMode = .scaleAspectFill
         
@@ -94,14 +97,14 @@ class WeatherWidget: UIView {
         tempView.addSubview(temperatureLabel)
         temperatureLabel.anchor(top: tempView.topAnchor, left: tempView.leftAnchor,
                                 bottom: tempView.bottomAnchor, right: tempView.rightAnchor,
-                                paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+                                paddingTop: 5, paddingBottom: 5)
         
         imageView.addSubview(weatherImage)
         weatherImage.anchor(top: imageView.topAnchor, left: imageView.leftAnchor,
                             bottom: imageView.bottomAnchor, right: imageView.rightAnchor,
                             paddingTop: 15, paddingLeft: 5, paddingBottom: 15, paddingRight: 15)
 
-        let stack = UIStackView(arrangedSubviews: [tempView, imageView])
+        let stack = UIStackView(arrangedSubviews: [imageView, tempView])
         stack.spacing = 5
         stack.axis = .horizontal
         stack.distribution = .fillEqually
@@ -110,24 +113,6 @@ class WeatherWidget: UIView {
         stack.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
         return view
-    }()
-    
-    private let rainImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage.init(named: Constant.wetImage)
-        image.tintColor = UIColor.init(named: Constant.textColor)
-        image.image = image.image?.withRenderingMode(.alwaysTemplate)
-        image.contentMode = .scaleAspectFit
-        
-        return image
-    }()
-    
-    private var probabilityOfPrecipitationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "25%"
-        label.textColor = UIColor.init(named: Constant.textColor)
-        label.font = UIFont.systemFont(ofSize: 10)
-        return label
     }()
     
     private let windImage: UIImageView = {
@@ -140,11 +125,10 @@ class WeatherWidget: UIView {
         return image
     }()
     
-    private var windSpeedLabel: UILabel = {
+    var windSpeedLabel: UILabel = {
         let label = UILabel()
-        label.text = "11 km/h"
         label.textColor = UIColor.init(named: Constant.textColor)
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
     
@@ -204,21 +188,13 @@ class WeatherWidget: UIView {
         addSubview(separator2)
         separator2.anchor(top: temperatureContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor,paddingTop: 3, paddingLeft: 10, paddingRight: 10)
         
-        addSubview(rainImage)
-        rainImage.dimensions(width: 22.5, height: 22.5)
-        rainImage.anchor(top: separator2.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 10)
-        
-        addSubview(probabilityOfPrecipitationLabel)
-        probabilityOfPrecipitationLabel.centerY(inView: rainImage, constant: 4)
-        probabilityOfPrecipitationLabel.anchor(left: rainImage.rightAnchor, paddingLeft: 0.8)
-        
         addSubview(windImage)
         windImage.dimensions(width: 22.5, height: 22.5)
-        windImage.anchor(top: separator2.bottomAnchor, left: probabilityOfPrecipitationLabel.rightAnchor, bottom: bottomAnchor, paddingTop: 5, paddingLeft: 2.5, paddingBottom: 10)
+        windImage.anchor(top: separator2.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 10)
         
         addSubview(windSpeedLabel)
-        windSpeedLabel.centerY(inView: rainImage, constant: 4)
-        windSpeedLabel.anchor(left: windImage.rightAnchor, paddingLeft: 0.8)
+        windSpeedLabel.centerY(inView: windImage, constant: 4)
+        windSpeedLabel.anchor(left: windImage.rightAnchor, paddingLeft: 1)
         
         addSubview(fahrenheitButton)
         fahrenheitButton.anchor(top: separator2.bottomAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingBottom: 10, paddingRight: 10)
