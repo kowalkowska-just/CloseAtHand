@@ -62,16 +62,9 @@ struct Constant {
     static let minTemp = "min-temp-icon"
     static let maxTemp = "max-temp-icon"
     
-    //Weather icons
-    
-    static let clearSky = "clear-sky"
-    static let drizzle = "drizzle"
-    static let fewClouds = "few-clouds"
-    
-    
     //Identifiers
     
-    static let hourlyForecastCell = "HourlyForecastCell"
-    static let weekForecastCell = "WeekForecastCell"
+    static let hourlyTableViewCell = "HourlyTableViewCell"
+    static let dailyTableViewCell = "DailyTableViewCell"
 }
 

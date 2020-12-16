@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeekForecastCell: UITableViewCell {
+class DailyTableViewCell: UITableViewCell {
 
     //MARK: - Properties
     

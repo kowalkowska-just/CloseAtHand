@@ -24,7 +24,6 @@ class WeatherWidget: UIView {
     
     var cityLabel: UILabel = {
         let label = UILabel()
-   //     label.text = "Gdańsk"
         label.textColor = UIColor.init(named: Constant.textColor)
         label.numberOfLines = 1
         label.lineBreakMode = .byClipping
@@ -71,11 +70,13 @@ class WeatherWidget: UIView {
     var temperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(named: Constant.textColor)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byClipping
+        label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
-        label.font = UIFont.systemFont(ofSize: 80)
+        label.font = label.font.withSize(label.frame.height)
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.baselineAdjustment = .alignCenters
+        label.lineBreakMode = .byClipping
         label.textAlignment = .center
 
         return label
@@ -97,15 +98,16 @@ class WeatherWidget: UIView {
         tempView.addSubview(temperatureLabel)
         temperatureLabel.anchor(top: tempView.topAnchor, left: tempView.leftAnchor,
                                 bottom: tempView.bottomAnchor, right: tempView.rightAnchor,
-                                paddingTop: 5, paddingBottom: 5)
+                                paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 15)
         
         imageView.addSubview(weatherImage)
+        weatherImage.centerX(inView: imageView)
         weatherImage.anchor(top: imageView.topAnchor, left: imageView.leftAnchor,
                             bottom: imageView.bottomAnchor, right: imageView.rightAnchor,
-                            paddingTop: 15, paddingLeft: 5, paddingBottom: 15, paddingRight: 15)
+                            paddingTop: 15, paddingLeft: 15, paddingBottom: 5, paddingRight: 5)
 
         let stack = UIStackView(arrangedSubviews: [imageView, tempView])
-        stack.spacing = 5
+        stack.spacing = 25
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         
@@ -113,6 +115,19 @@ class WeatherWidget: UIView {
         stack.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
         return view
+    }()
+    
+    var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.init(named: Constant.textColor)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byClipping
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textAlignment = .left
+        
+        return label
     }()
     
     private let windImage: UIImageView = {
@@ -128,7 +143,7 @@ class WeatherWidget: UIView {
     var windSpeedLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(named: Constant.textColor)
-        label.font = UIFont.systemFont(ofSize: 13)
+        label.font = UIFont.systemFont(ofSize: 11)
         return label
     }()
     
@@ -169,8 +184,9 @@ class WeatherWidget: UIView {
         titleView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         
         addSubview(locationContainerView)
-        locationContainerView.anchor(top: titleView.bottomAnchor, left: leftAnchor, paddingTop: 5, paddingLeft: 10)
-        locationContainerView.dimensions(height: 40)
+        locationContainerView.anchor(top: titleView.bottomAnchor, left: leftAnchor,
+                                     paddingTop: 2, paddingLeft: 10)
+        locationContainerView.dimensions(height: 36)
         
         addSubview(weatherButton)
         weatherButton.dimensions(width: 20)
@@ -181,28 +197,39 @@ class WeatherWidget: UIView {
         addSubview(separator1)
         separator1.anchor(top: locationContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 10, paddingRight: 10)
         
-        addSubview(temperatureContainerView)
-        temperatureContainerView.anchor(top: separator1.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 3, paddingLeft: 10, paddingRight: 10)
-        
-        let separator2 = UIView().createSeparator(color: UIColor.init(named: Constant.textColor) ?? .white)
-        addSubview(separator2)
-        separator2.anchor(top: temperatureContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor,paddingTop: 3, paddingLeft: 10, paddingRight: 10)
-        
         addSubview(windImage)
-        windImage.dimensions(width: 22.5, height: 22.5)
-        windImage.anchor(top: separator2.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 10)
+        windImage.dimensions(width: 16, height: 16)
+        windImage.anchor(left: leftAnchor, bottom: bottomAnchor,
+                         paddingLeft: 10, paddingBottom: 5)
         
         addSubview(windSpeedLabel)
-        windSpeedLabel.centerY(inView: windImage, constant: 4)
-        windSpeedLabel.anchor(left: windImage.rightAnchor, paddingLeft: 1)
+        windSpeedLabel.centerY(inView: windImage)
+        windSpeedLabel.anchor(left: windImage.rightAnchor, paddingLeft: 5)
         
         addSubview(fahrenheitButton)
-        fahrenheitButton.anchor(top: separator2.bottomAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingBottom: 10, paddingRight: 10)
+        fahrenheitButton.anchor(bottom: bottomAnchor, right: rightAnchor,
+                                paddingBottom: 5, paddingRight: 10)
         fahrenheitButton.dimensions(width: 19, height: 19)
         
         addSubview(celciusButton)
-        celciusButton.anchor(top: separator2.bottomAnchor, bottom: bottomAnchor, right: fahrenheitButton.leftAnchor, paddingTop: 5, paddingBottom: 10)
+        celciusButton.anchor(bottom: bottomAnchor, right: fahrenheitButton.leftAnchor,
+                             paddingBottom: 5)
         celciusButton.dimensions(width: 19, height: 19)
+        
+        let separator2 = UIView().createSeparator(color: UIColor.init(named: Constant.textColor) ?? .white)
+        addSubview(separator2)
+        separator2.anchor(left: leftAnchor, bottom: windImage.topAnchor, right: rightAnchor,
+                          paddingLeft: 10, paddingBottom: 5, paddingRight: 10)
+        
+        addSubview(descriptionLabel)
+        descriptionLabel.dimensions(height: 15)
+        descriptionLabel.anchor(left: leftAnchor, bottom: separator2.topAnchor, right: rightAnchor,
+                                paddingLeft: 10, paddingBottom: 3, paddingRight: 10)
+        
+        addSubview(temperatureContainerView)
+        temperatureContainerView.anchor(top: separator1.bottomAnchor, left: leftAnchor,
+                                        bottom: descriptionLabel.topAnchor, right: rightAnchor,
+                                        paddingTop: 5, paddingLeft: 10, paddingBottom: 5, paddingRight: 10)
     }
     
     // MARK: - Selectors

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HourlyForecastCell: UITableViewCell {
+class HourlyTableViewCell: UITableViewCell {
 
     //MARK: - Properties
     
@@ -21,7 +21,7 @@ class HourlyForecastCell: UITableViewCell {
     
     private var weatherImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: Constant.clearSky)
+   //     image.image = UIImage(named: Constant.clearSky)
         return image
     }()
     

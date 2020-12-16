@@ -13,20 +13,19 @@ class WeatherController: UIViewController {
     
 //MARK: - Properties
     
-    private var hourlyForecasteTableView: UITableView!
-    private var weekForecasteTableView: UITableView!
-    private let locationContainerView = CurrentLocationView()
-    private let temperatureContainerView = CurrentTemperatureView()
-    private let weatherModels = [WeatherData]()
-    private var currentWeatherModels = [CurrentWeatherData]()
-    private var hourlyForecastModels = [HourlyForecastData]()
-    private var dailyForecastModels = [DailyForecastData]()
+  //  private var weatherModels = [WeatherModel]()
+    private var tableView = UITableView()
+    
+    private lazy var currentWeatherHeader: CurrentWeatherHeader = {
+        let frame = CGRect(x: 15, y: 0, width: view.frame.width - 30, height: 150)
+        let view = CurrentWeatherHeader(frame: frame)
+        return view
+    }()
     
 //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
     }
 
@@ -34,43 +33,27 @@ class WeatherController: UIViewController {
     
     private func configureUI() {
         configureNavBar()
-       // configureTableView()
+        configureTableView()
         view.backgroundColor = UIColor.init(named: Constant.backgroundColor)
         
-        view.addSubview(locationContainerView)
-        locationContainerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
-                                 paddingTop: 15, paddingLeft: 15, paddingRight: 15)
-        
-        view.addSubview(temperatureContainerView)
-        temperatureContainerView.anchor(top: locationContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
-                                    paddingTop: 5, paddingLeft: 15, paddingRight: 15)
-        
-//        view.addSubview(hourlyForecasteTableView)
-//        hourlyForecasteTableView.layer.cornerRadius = 5
-//        hourlyForecasteTableView.anchor(top: temperatureContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingRight: 15)
-//        
-//        view.addSubview(weekForecasteTableView)
-//        weekForecasteTableView.layer.cornerRadius = 5
-//        weekForecasteTableView.anchor(top: hourlyForecasteTableView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingRight: 15)
+        view.addSubview(tableView)
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 15, paddingBottom: 15, paddingRight: 15)
     }
     
     func configureTableView() {
-        weekForecasteTableView.delegate = self
-        weekForecasteTableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        weekForecasteTableView.backgroundColor = UIColor(named: Constant.secendaryBackgroundColor)
-        weekForecasteTableView.separatorStyle = .none
-        weekForecasteTableView.isScrollEnabled = true
-        weekForecasteTableView.register(UITableViewCell.self, forCellReuseIdentifier: Constant.weekForecastCell)
+        tableView.rowHeight = 60
+        tableView.register(DailyTableViewCell.self, forCellReuseIdentifier: Constant.dailyTableViewCell)
+        tableView.register(HourlyTableViewCell.self, forCellReuseIdentifier: Constant.hourlyTableViewCell)
         
-        hourlyForecasteTableView.delegate = self
-        hourlyForecasteTableView.dataSource = self
+        tableView.backgroundColor = UIColor(named: Constant.backgroundColor)
+        tableView.isScrollEnabled = true
         
-        hourlyForecasteTableView.backgroundColor = UIColor(named: Constant.secendaryBackgroundColor)
-        hourlyForecasteTableView.separatorStyle = .none
-        hourlyForecasteTableView.isScrollEnabled = true
-        hourlyForecasteTableView.register(UITableViewCell.self, forCellReuseIdentifier: Constant.weekForecastCell)
-    }
+        tableView.tableHeaderView = currentWeatherHeader
+        tableView.tableFooterView = UIView()
+        }
     
     private func configureNavBar() {
         configureNavigationBar(withTitle: "Weather", withColor: UIColor.init(named: Constant.backgroundColor)!)
@@ -116,31 +99,14 @@ class WeatherController: UIViewController {
 //MARK: - UITableViewDelegate/DataSource
 
 extension WeatherController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        switch tableView {
-        case hourlyForecasteTableView:
-            return hourlyForecastModels.count
-        case weekForecasteTableView:
-            return dailyForecastModels.count
-        default:
-            return 0
-        }
+        return 5
+       // return weatherModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var cell = UITableViewCell()
-        switch tableView {
-        case hourlyForecasteTableView:
-            cell = tableView.dequeueReusableCell(withIdentifier: Constant.hourlyForecastCell, for: indexPath) as! HourlyForecastCell
-            return cell
-        case weekForecasteTableView:
-            cell = tableView.dequeueReusableCell(withIdentifier: Constant.weekForecastCell, for: indexPath) as! WeekForecastCell
-            return cell
-        default:
             return UITableViewCell()
-
-        }
     }
 }
+

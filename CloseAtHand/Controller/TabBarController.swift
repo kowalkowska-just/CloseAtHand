@@ -11,11 +11,11 @@ class TabBarController: UITabBarController {
 
     // MARK: - Properties
     
-    let vc1 = UINavigationController(rootViewController: HomeController())
-    let vc2 = UINavigationController(rootViewController: ToDoListController())
-    let vc3 = UINavigationController(rootViewController: PlannerController())
-    let vc4 = UINavigationController(rootViewController: NotesController())
-    let vc5 = UINavigationController(rootViewController: PlacesController())
+    private let vc1 = UINavigationController(rootViewController: HomeController())
+    private let vc2 = UINavigationController(rootViewController: ToDoListController())
+    private let vc3 = UINavigationController(rootViewController: PlannerController())
+    private let vc4 = UINavigationController(rootViewController: NotesController())
+    private let vc5 = UINavigationController(rootViewController: PlacesController())
     
     // MARK: - Lifecycle
     

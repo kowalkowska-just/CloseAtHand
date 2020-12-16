@@ -29,11 +29,15 @@ struct WeatherModel {
     let weatherIcon: String
     
     var temperatureString: String {
-        return String(format: "%.1f", temperature) + " °"
+        return String(format: "%.0f", temperature) + "°"
     }
     
     var windSpeedString: String {
-        return String(format: "%.f", windSpeed) + " m/s"
+        return String(format: "%.1f", windSpeed) + " m/s"
+    }
+    
+    var description: String {
+        return weatherDescription.prefix(1).uppercased() + weatherDescription.lowercased().dropFirst()
     }
     
     var conditionImage: String {

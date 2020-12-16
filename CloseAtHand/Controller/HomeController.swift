@@ -137,12 +137,7 @@ class HomeController: UIViewController {
         }
     }
     
-    enum AddressName: Int {
-        case country
-        case city
-    }
-    
-    func getAddressFromLatLong(lat: Double, long: Double, completion: @escaping(String, String) -> Void ) {
+    func getAddressFromLatLong(lat: Double, long: Double, completion: @escaping(_ city: String, _ country: String) -> Void ) {
         
         var center = CLLocationCoordinate2D()
         center.latitude = lat
@@ -205,6 +200,7 @@ extension HomeController: WeatherManagerDelegate {
             }
             
             self.weatherWidget.temperatureLabel.text = weather.temperatureString
+            self.weatherWidget.descriptionLabel.text = weather.description
             self.weatherWidget.windSpeedLabel.text = weather.windSpeedString
             self.weatherWidget.weatherImage.image = UIImage(named: weather.conditionImage)
 
