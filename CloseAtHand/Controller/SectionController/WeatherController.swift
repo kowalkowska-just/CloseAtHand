@@ -36,8 +36,6 @@ class WeatherController: UIViewController {
         configureTableView()
         view.backgroundColor = UIColor.init(named: Constant.backgroundColor)
         
-        view.addSubview(tableView)
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 15, paddingBottom: 15, paddingRight: 15)
     }
     
     func configureTableView() {
@@ -53,6 +51,9 @@ class WeatherController: UIViewController {
         
         tableView.tableHeaderView = currentWeatherHeader
         tableView.tableFooterView = UIView()
+        
+        view.addSubview(tableView)
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 15, paddingBottom: 15, paddingRight: 15)
         }
     
     private func configureNavBar() {

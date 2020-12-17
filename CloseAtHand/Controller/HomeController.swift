@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-import CoreData
+import CoreLocation
 
 class HomeController: UIViewController {
 
@@ -21,7 +21,8 @@ class HomeController: UIViewController {
     private let placesWidget = PlacesWidget()
     private let notesWidget = NotesWidget()
     
-    private let locationManager = CLLocationManager()
+    let locationHandler = LocationHandler()
+//    private let locationManager = CLLocationManager()
     var weatherManager = WeatherManager()
 
     
@@ -30,10 +31,10 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.requestLocation()
+        locationHandler.delegate = self
         weatherWidget.delegate = self
         weatherManager.delegate = self
         //        signOut()
@@ -209,20 +210,32 @@ extension HomeController: WeatherManagerDelegate {
     }
 }
 
-//MARK: - CCLocationManagerDelegatec
+//MARK: - LocationUpdateProtocol
 
-extension HomeController: CLLocationManagerDelegate {
+extension HomeController: LocationUpdateProtocol {
+    func locationDidUpdateToLocation(location: CLLocation) {
+        let lat = location.coordinate.latitude
+        let long = location.coordinate.longitude
+        
+        self.weatherManager.fetchWeather(longitude: long, latitude: lat)
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            locationManager.stopUpdatingLocation()
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
-            weatherManager.fetchWeather(longitude: lon, latitude: lat)
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("DEBUG: Failed update location with error: \(error)")
     }
 }
+
+//MARK: - CCLocationManagerDelegatec
+
+//extension HomeController: CLLocationManagerDelegate {
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last {
+//            locationManager.stopUpdatingLocation()
+//            let lat = location.coordinate.latitude
+//            let lon = location.coordinate.longitude
+//            weatherManager.fetchWeather(longitude: lon, latitude: lat)
+//        }
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("DEBUG: Failed update location with error: \(error)")
+//    }
+//}
