@@ -51,12 +51,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>"Please allow location to see local weather."</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>"Please allow location to see local weather."</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>"Please allow location to see local weather."</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Satisfy-Regular.ttf</string>
@@ -101,5 +95,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>&quot;Please allow location to see local weather.&quot;</string>
 </dict>
 </plist>

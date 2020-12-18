@@ -8,41 +8,74 @@
 import UIKit
 import CoreLocation
 
-protocol LocationUpdateProtocol {
-    func locationDidUpdateToLocation(location: CLLocation)
-}
+//protocol LocationUpdateProtocol {
+//    func locationDidUpdateToLocation(location: CLLocation)
+//}
 
-public class LocationHandler: NSObject, CLLocationManagerDelegate {
+typealias LocateMeCallback = (_ location: CLLocation?) -> Void
 
+class LocationHandler: NSObject, CLLocationManagerDelegate {
+    
     static let shared = LocationHandler()
     
-    var location = CLLocation()
-    var locationManager: CLLocationManager!
-    var delegate: LocationUpdateProtocol!
-
- //   var weatherManager = WeatherManager()
-    
-    override init () {
-        super.init()
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+    var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.activityType = .automotiveNavigation
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLLocationAccuracyKilometer
-        locationManager.startUpdatingLocation()
         
-    }
-
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        if manager.location != nil {
-            guard let location = locations.last else { return }
-            locationManager.stopUpdatingLocation()
-            delegate.locationDidUpdateToLocation(location: location)
-        } 
+        return locationManager
+    }()
+    
+    var locateMeCallback: LocateMeCallback?
+    var currentLocation: CLLocation?
+    var isCurrentLocationAvailable: Bool {
+        return currentLocation != nil
     }
     
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("DEBUG: Failed update location with error: \(error)")
+    var location = CLLocation()
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        locationManager.delegate = self
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            // Disable location features
+            print("DEBUG: Fail permission to get current location of user")
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedAlways:
+            break
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            enableMyWhenInUseFeatures()
+        @unknown default:
+            break
+        }
+    }
+        
+    func enableMyWhenInUseFeatures() {
+       locationManager.startUpdatingLocation()
+    }
+
+    func locateMe(callback: @escaping LocateMeCallback) {
+        self.locateMeCallback = callback
+        locationManagerDidChangeAuthorization(locationManager)
+    }
+
+    private override init() {}
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        print("DEBUG: Locations = \(location.coordinate.latitude) \(location.coordinate.longitude)")
+        locateMeCallback?(location)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.locationManagerDidChangeAuthorization(self.locationManager)
     }
 }

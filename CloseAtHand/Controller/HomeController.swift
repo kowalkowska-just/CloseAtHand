@@ -14,15 +14,13 @@ class HomeController: UIViewController {
     //MARK: - Properties
     
     private var weatherWidget = WeatherWidget()
-    
     private let calendarWidget = CalendarWidget()
     private let toDoListWidget = ToDoListWidget()
     private let plannerWidget = PlannerWidget()
     private let placesWidget = PlacesWidget()
     private let notesWidget = NotesWidget()
     
-    let locationHandler = LocationHandler()
-//    private let locationManager = CLLocationManager()
+//    let locationHandler = LocationHandler()
     var weatherManager = WeatherManager()
 
     
@@ -30,16 +28,21 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestLocation()
-        locationHandler.delegate = self
+
+//        locationHandler.delegate = self
         weatherWidget.delegate = self
         weatherManager.delegate = self
         //        signOut()
         configureUI()
         checkIfUserIsLoggedIn()
+        
+        LocationHandler.shared.locateMe { (location) in
+            guard let location = location else { return }
+            let lat = location.coordinate.latitude
+            let long = location.coordinate.longitude
+            
+            self.weatherManager.fetchWeather(longitude: long, latitude: lat)
+        }
     }
     
     //MARK: - API
@@ -176,7 +179,7 @@ class HomeController: UIViewController {
 extension HomeController: WeatherWidgetDelegate {
     func showWeatherController() {
         
-        print("Show Weather Controller")
+        print("DEBUG: Show Weather Controller")
         let controller = UINavigationController(rootViewController: WeatherController())
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
@@ -187,7 +190,7 @@ extension HomeController: WeatherWidgetDelegate {
 
 extension HomeController: WeatherManagerDelegate {
     func didFailWithError(error: Error) {
-        print("Failed parse JSON with error: \(error)")
+        print("DEBUG: Failed parse JSON with error: \(error)")
     }
     
     func didUpdateWeather(weather: WeatherModel) {
@@ -209,33 +212,3 @@ extension HomeController: WeatherManagerDelegate {
         }
     }
 }
-
-//MARK: - LocationUpdateProtocol
-
-extension HomeController: LocationUpdateProtocol {
-    func locationDidUpdateToLocation(location: CLLocation) {
-        let lat = location.coordinate.latitude
-        let long = location.coordinate.longitude
-        
-        self.weatherManager.fetchWeather(longitude: long, latitude: lat)
-
-    }
-}
-
-//MARK: - CCLocationManagerDelegatec
-
-//extension HomeController: CLLocationManagerDelegate {
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let location = locations.last {
-//            locationManager.stopUpdatingLocation()
-//            let lat = location.coordinate.latitude
-//            let lon = location.coordinate.longitude
-//            weatherManager.fetchWeather(longitude: lon, latitude: lat)
-//        }
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print("DEBUG: Failed update location with error: \(error)")
-//    }
-//}

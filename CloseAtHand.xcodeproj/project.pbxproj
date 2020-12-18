@@ -27,8 +27,6 @@
 		D16C0840256FE09F00D16F2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16C083E256FE09F00D16F2C /* Main.storyboard */; };
 		D16C0842256FE0A000D16F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D16C0841256FE0A000D16F2C /* Assets.xcassets */; };
 		D16C0845256FE0A000D16F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16C0843256FE0A000D16F2C /* LaunchScreen.storyboard */; };
-		D16C0850256FE0A100D16F2C /* CloseAtHandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C084F256FE0A100D16F2C /* CloseAtHandTests.swift */; };
-		D16C085B256FE0A100D16F2C /* CloseAtHandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C085A256FE0A100D16F2C /* CloseAtHandUITests.swift */; };
 		D16C087B256FE39900D16F2C /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C087A256FE39900D16F2C /* LoginController.swift */; };
 		D16C0880256FE3B500D16F2C /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C087F256FE3B500D16F2C /* SignUpController.swift */; };
 		D16C0885256FE3D600D16F2C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C0884256FE3D600D16F2C /* Extension.swift */; };
@@ -92,11 +90,7 @@
 		D16C0844256FE0A000D16F2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D16C0846256FE0A000D16F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16C084B256FE0A100D16F2C /* CloseAtHandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloseAtHandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D16C084F256FE0A100D16F2C /* CloseAtHandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseAtHandTests.swift; sourceTree = "<group>"; };
-		D16C0851256FE0A100D16F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16C0856256FE0A100D16F2C /* CloseAtHandUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloseAtHandUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D16C085A256FE0A100D16F2C /* CloseAtHandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseAtHandUITests.swift; sourceTree = "<group>"; };
-		D16C085C256FE0A100D16F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16C087A256FE39900D16F2C /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D16C087F256FE3B500D16F2C /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		D16C0884256FE3D600D16F2C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -239,8 +233,6 @@
 			children = (
 				D16C0837256FE09F00D16F2C /* CloseAtHand */,
 				D16C088C256FFF5200D16F2C /* Fonts */,
-				D16C084E256FE0A100D16F2C /* CloseAtHandTests */,
-				D16C0859256FE0A100D16F2C /* CloseAtHandUITests */,
 				D16C0836256FE09F00D16F2C /* Products */,
 				9D671DBA8F04844D31438B66 /* Pods */,
 				6769939512EA3BEB4920A5FF /* Frameworks */,
@@ -272,24 +264,6 @@
 				D16C0876256FE32000D16F2C /* Storyboard */,
 			);
 			path = CloseAtHand;
-			sourceTree = "<group>";
-		};
-		D16C084E256FE0A100D16F2C /* CloseAtHandTests */ = {
-			isa = PBXGroup;
-			children = (
-				D16C084F256FE0A100D16F2C /* CloseAtHandTests.swift */,
-				D16C0851256FE0A100D16F2C /* Info.plist */,
-			);
-			path = CloseAtHandTests;
-			sourceTree = "<group>";
-		};
-		D16C0859256FE0A100D16F2C /* CloseAtHandUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D16C085A256FE0A100D16F2C /* CloseAtHandUITests.swift */,
-				D16C085C256FE0A100D16F2C /* Info.plist */,
-			);
-			path = CloseAtHandUITests;
 			sourceTree = "<group>";
 		};
 		D16C086B256FE23800D16F2C /* Delegate */ = {
@@ -592,7 +566,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16C0850256FE0A100D16F2C /* CloseAtHandTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +573,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16C085B256FE0A100D16F2C /* CloseAtHandUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
